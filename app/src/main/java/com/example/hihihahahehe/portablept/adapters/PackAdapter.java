@@ -50,10 +50,10 @@ public class PackAdapter extends RecyclerView.Adapter<PackAdapter.PackViewHolder
     public void onBindViewHolder(PackViewHolder holder, int position) {
         PackModel packModel = packModelList.get(position);
 
-        holder.tvNamePack.setText(packModel.getPackName());
-        holder.tvGoal.setText(packModel.getGoal());
-        holder.tvCost.setText(packModel.getCost());
-        holder.tvDuration.setText(packModel.getDuration());
+     //   holder.tvNamePack.setText(packModel.getPackName());
+//        holder.tvGoal.setText(packModel.getGoal());
+//        holder.tvCost.setText(packModel.getCost());
+//        holder.tvDuration.setText(packModel.getDuration());
     }
 
     @Override
@@ -62,19 +62,18 @@ public class PackAdapter extends RecyclerView.Adapter<PackAdapter.PackViewHolder
     }
 
     public class PackViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.tv_name)
-        TextView tvNamePack;
-        @BindView(R.id.tv_duration)
-        TextView tvDuration;
-        @BindView(R.id.tv_goal)
-        TextView tvGoal;
-        @BindView(R.id.tv_cost)
-        TextView tvCost;
+//        @BindView(R.id.tv_name)
+//        TextView tvNamePack;
+//        @BindView(R.id.tv_duration)
+//        TextView tvDuration;
+//        @BindView(R.id.tv_goal)
+//        TextView tvGoal;
+//        @BindView(R.id.tv_cost)
+//        TextView tvCost;
 
         public PackViewHolder(View itemView) {
             super(itemView);
 
-            ButterKnife.bind(this, itemView);
         }
     }
 }
