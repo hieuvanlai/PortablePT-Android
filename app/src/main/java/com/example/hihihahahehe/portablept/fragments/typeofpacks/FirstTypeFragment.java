@@ -16,7 +16,7 @@ import com.example.hihihahahehe.portablept.models.FaceBookModel;
 import com.example.hihihahahehe.portablept.models.JSONModel.PackJSONModel;
 import com.example.hihihahahehe.portablept.models.PackModel;
 import com.example.hihihahahehe.portablept.networks.RetrofitFactory;
-import com.example.hihihahahehe.portablept.networks.services.GetPacks;
+import com.example.hihihahahehe.portablept.networks.services.GetZumbaPacks;
 import com.example.hihihahahehe.portablept.utils.RealmHandle;
 
 import java.util.ArrayList;
@@ -59,16 +59,16 @@ public class FirstTypeFragment extends Fragment {
     }
 
     private void loadData() {
-        final GetPacks getPacks = RetrofitFactory.getInstance().create(GetPacks.class);
+        final GetZumbaPacks getZumbaPacks = RetrofitFactory.getInstance().create(GetZumbaPacks.class);
         faceBookModel = RealmHandle.getData();
-        getPacks.getPacks().enqueue(new Callback<List<PackJSONModel>>() {
+        getZumbaPacks.getZumbaPacks().enqueue(new Callback<List<PackJSONModel>>() {
             @Override
             public void onResponse(Call<List<PackJSONModel>> call, Response<List<PackJSONModel>> response) {
                 if (response.body() != null) {
                     for (PackJSONModel packJSONModel : response.body()) {
                         PackModel packModel = new PackModel();
                         packModel.setPackName(packJSONModel.getPackName());
-                        packModel.setCoachName(faceBookModel.getLast_Name() + " " + faceBookModel.getFirst_Name());
+//                        packModel.setCoachName(faceBookModel.getLast_Name() + " " + faceBookModel.getFirst_Name());
                         packModel.setType(packJSONModel.getPurpose());
                         packModel.setPrice(packJSONModel.getPrice());
                         packModel.setDuration(packJSONModel.getDuration());
