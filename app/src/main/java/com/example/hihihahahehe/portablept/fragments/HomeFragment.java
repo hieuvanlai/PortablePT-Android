@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.hihihahahehe.portablept.R;
+import com.example.hihihahahehe.portablept.adapters.CoverPagerAdapter;
 import com.example.hihihahahehe.portablept.adapters.HotCoachesAdapter;
 import com.example.hihihahahehe.portablept.adapters.HotSportsAdapter;
 import com.example.hihihahahehe.portablept.adapters.PackAdapter;
@@ -42,8 +43,8 @@ import retrofit2.Response;
 public class HomeFragment extends Fragment {
     @BindView(R.id.tv_hot)
     TextView tvHot;
-    @BindView(R.id.iv_cover_photo)
-    ImageView ivCoverPhoto;
+    @BindView(R.id.cover_pager)
+    ViewPager coverPager;
 
     RecyclerView rvHotCoaches;
 
@@ -62,6 +63,8 @@ public class HomeFragment extends Fragment {
     private HotCoachesAdapter hotCoachesAdapter;
     private HotSportsAdapter hotSportsAdapter;
     private PackAdapter hotPackAdapter;
+
+    private CoverPagerAdapter coverPagerAdapter;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -134,9 +137,8 @@ public class HomeFragment extends Fragment {
     private void setupUI(View view) {
         ButterKnife.bind(this, view);
 
-        Picasso.with(getContext())
-                .load("https://i.ytimg.com/vi/hVWLn9m6Ezg/maxresdefault.jpg")
-                .into(ivCoverPhoto);
+        coverPagerAdapter = new CoverPagerAdapter(getContext(), hotCoachesModelList, hotSportsModelList);
+        coverPager.setAdapter(coverPagerAdapter);
 
         hotCoachesAdapter = new HotCoachesAdapter(hotCoachesModelList, getContext());
         rvHotCoaches.setAdapter(hotCoachesAdapter);

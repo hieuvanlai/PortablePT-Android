@@ -60,6 +60,7 @@ public class PackAdapter extends RecyclerView.Adapter<PackAdapter.PackViewHolder
         holder.tvPrice.setText(packModel.getPrice());
         holder.tvType.setText(packModel.getType());
         Picasso.with(context).load(packModel.getImageUrl()).into(holder.ivPack);
+
     }
 
     @Override
@@ -82,7 +83,6 @@ public class PackAdapter extends RecyclerView.Adapter<PackAdapter.PackViewHolder
         public PackViewHolder(View itemView) {
             super(itemView);
 
-            ButterKnife.bind(this, itemView);
         }
     }
 }

@@ -13,6 +13,6 @@ import retrofit2.http.GET;
  */
 
 public interface GetPacks {
-    @GET("get-pack-add/Zumba")
+    @GET("get-pack-all")
     Call<List<PackJSONModel>> getPacks ();
 }
