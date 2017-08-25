@@ -72,7 +72,6 @@ public class CoverPagerAdapter extends PagerAdapter{
     @Override
     public Object instantiateItem(ViewGroup container, int position){
         layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        ButterKnife.bind(this, )
 
         if(hotCoachesModelList.size() > 0 && hotSportsModelList.size() > 0){
             int randCoaches = ThreadLocalRandom.current().nextInt(0, hotCoachesModelList.size());
