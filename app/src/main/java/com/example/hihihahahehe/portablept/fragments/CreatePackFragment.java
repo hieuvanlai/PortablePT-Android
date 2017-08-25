@@ -1,6 +1,7 @@
 package com.example.hihihahahehe.portablept.fragments;
 
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -16,6 +17,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -54,7 +57,7 @@ import static android.app.Activity.RESULT_OK;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class CreatePackFragment extends Fragment {
+public class CreatePackFragment extends Fragment implements View.OnClickListener {
     private static final String TAG = CreatePackFragment.class.toString();
     private static final int RESULT_LOAD_IMAGE = 1;
     private FaceBookModel faceBookModel;
@@ -93,6 +96,7 @@ public class CreatePackFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_create_pack, container, false);
         setupUI(view);
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         return view;
     }
 
@@ -103,69 +107,11 @@ public class CreatePackFragment extends Fragment {
     }
 
     private void setOnClickItem() {
-        btCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ScreenManager.onBackPressed(getActivity().getSupportFragmentManager());
-            }
-        });
-
-        tvSetWeek.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showChooseWeekDialog();
-            }
-        });
-
-        btCreate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                new UploadService().execute();
-                final AddPack addPack = RetrofitFactory.getInstance().create(AddPack.class);
-
-                faceBookModel = RealmHandle.getData();
-                String phoneNumber = edtPhone.getText().toString();
-                packName = String.valueOf(edtPackName.getText());
-                String coach = faceBookModel.getLast_Name() + " " + faceBookModel.getFirst_Name();
-                String price = edtPackPrice.getText().toString() + " VND";
-                String address = edtAddress.getText().toString();
-                String imageUrl = "https://res.cloudinary.com/dekbhfa6g/image/upload/" + edtPackName.getText().toString() + ".jpg";
-
-                PackJSONModel model = new PackJSONModel(phoneNumber, type, packName, coach, price, duration, imageUrl, address);
-
-                addPack.addPack(model).enqueue(new Callback<PackJSONModel>() {
-                    @Override
-                    public void onResponse(Call<PackJSONModel> call, Response<PackJSONModel> response) {
-                        Toast.makeText(getContext(), "Đã thêm gói tập mới !", Toast.LENGTH_SHORT).show();
-                        FragmentManager fm = getActivity().getSupportFragmentManager();
-                        fm.popBackStack();
-                    }
-
-                    @Override
-                    public void onFailure(Call<PackJSONModel> call, Throwable t) {
-                        Toast.makeText(getContext(), "Không thể tạo, vui lòng kiểm tra lại kết nối !", Toast.LENGTH_SHORT).show();
-                        FragmentManager fm = getActivity().getSupportFragmentManager();
-                        fm.popBackStack();
-                    }
-                });
-            }
-        });
-
-        ivAddImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent pickPhoto = new Intent(Intent.ACTION_PICK,
-                        android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(pickPhoto, RESULT_LOAD_IMAGE);
-            }
-        });
-
-        tvSetType.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showChooseTypeDialog();
-            }
-        });
+        btCancel.setOnClickListener(this);
+        tvSetWeek.setOnClickListener(this);
+        btCreate.setOnClickListener(this);
+        ivAddImage.setOnClickListener(this);
+        tvSetType.setOnClickListener(this);
     }
 
     private void showChooseTypeDialog() {
@@ -212,6 +158,56 @@ public class CreatePackFragment extends Fragment {
         if (resultCode == RESULT_OK && requestCode == RESULT_LOAD_IMAGE) {
             imageUrl = data.getData();
             ivAddImage.setImageURI(imageUrl);
+        }
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.bt_cancel:
+                ScreenManager.onBackPressed(getActivity().getSupportFragmentManager());
+                break;
+            case R.id.tv_set_week:
+                showChooseWeekDialog();
+                break;
+            case R.id.bt_create:
+                new UploadService().execute();
+                final AddPack addPack = RetrofitFactory.getInstance().create(AddPack.class);
+
+                faceBookModel = RealmHandle.getData();
+                String phoneNumber = edtPhone.getText().toString();
+                packName = String.valueOf(edtPackName.getText());
+                String coach = faceBookModel.getLast_Name() + " " + faceBookModel.getFirst_Name();
+                String price = edtPackPrice.getText().toString() + " VND";
+                String address = edtAddress.getText().toString();
+                String imageUrl = "https://res.cloudinary.com/dekbhfa6g/image/upload/" + edtPackName.getText().toString() + ".jpg";
+
+                PackJSONModel model = new PackJSONModel(phoneNumber, type, packName, coach, price, duration, imageUrl, address);
+
+                addPack.addPack(model).enqueue(new Callback<PackJSONModel>() {
+                    @Override
+                    public void onResponse(Call<PackJSONModel> call, Response<PackJSONModel> response) {
+                        Toast.makeText(getContext(), "Đã thêm gói tập mới !", Toast.LENGTH_SHORT).show();
+                        FragmentManager fm = getActivity().getSupportFragmentManager();
+                        fm.popBackStack();
+                    }
+
+                    @Override
+                    public void onFailure(Call<PackJSONModel> call, Throwable t) {
+                        Toast.makeText(getContext(), "Không thể tạo, vui lòng kiểm tra lại kết nối !", Toast.LENGTH_SHORT).show();
+                        FragmentManager fm = getActivity().getSupportFragmentManager();
+                        fm.popBackStack();
+                    }
+                });
+                break;
+            case R.id.iv_add_image:
+                Intent pickPhoto = new Intent(Intent.ACTION_PICK,
+                        android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(pickPhoto, RESULT_LOAD_IMAGE);
+                break;
+            case R.id.tv_set_type:
+                showChooseTypeDialog();
+                break;
         }
     }
 

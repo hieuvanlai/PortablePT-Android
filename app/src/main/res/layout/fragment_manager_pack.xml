@@ -8,6 +8,7 @@
     tools:context="com.example.hihihahahehe.portablept.fragments.ManagerPackFragment">
 
     <RelativeLayout
+        android:layout_marginBottom="5dp"
         android:background="@color/colorPrimaryDark"
         android:id="@+id/relative_layout"
         android:layout_width="match_parent"

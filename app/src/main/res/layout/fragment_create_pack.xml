@@ -118,6 +118,8 @@
             android:textStyle="bold" />
 
         <EditText
+            android:maxLength="13"
+            android:textSize="14sp"
             android:textAlignment="center"
             android:id="@+id/edt_phone"
             android:layout_width="match_parent"
@@ -139,6 +141,7 @@
             android:textStyle="bold" />
 
         <EditText
+            android:maxLength="15"
             android:textAlignment="center"
             android:id="@+id/edt_pack_price"
             android:layout_width="match_parent"
@@ -161,6 +164,7 @@
             android:textStyle="bold" />
 
         <EditText
+            android:maxLength="200"
             android:id="@+id/edt_address"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
