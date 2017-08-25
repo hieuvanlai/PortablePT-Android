@@ -51,7 +51,7 @@ public class CalendarFragment extends Fragment {
         Date today = calendar.getTime();
         ArrayList<String> dayOfWeek = new ArrayList<>();
         dayOfWeek.add(sdf.format(today));
-        for(int i = 1; i <= 6; i++) {
+        for(int i = 1; i <= 4; i++) {
             calendar.add(Calendar.DAY_OF_YEAR, 1);
             Date newDate = calendar.getTime();
             dayOfWeek.add(sdf.format(newDate));

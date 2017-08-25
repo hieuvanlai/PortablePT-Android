@@ -62,12 +62,12 @@ public class FirstScreenFragment extends Fragment {
         Utils.setIconBottomBar(tabLayout, iconUser);
         tabLayout.setSelectedTabIndicatorColor(Color.TRANSPARENT);
 
-        final View touchView = view.findViewById(R.id.view_pager);
-        touchView.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                return true;
-            }
-        });
+//        final View touchView = view.findViewById(R.id.view_pager);
+////        touchView.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//                return true;
+//            }
+//        });
     }
 }

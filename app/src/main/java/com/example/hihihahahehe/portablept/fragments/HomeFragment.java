@@ -1,10 +1,8 @@
 package com.example.hihihahahehe.portablept.fragments;
 
 
-import android.media.Image;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -97,10 +95,10 @@ public class HomeFragment extends Fragment {
 
                     PackModel hotPackModel = new PackModel();
                     hotPackModel.setCoachName(packJSONModel.getCoach());
-                    hotPackModel.setCost(packJSONModel.getPrice());
+                    hotPackModel.setPrice(packJSONModel.getPrice());
                     hotPackModel.setDuration(packJSONModel.getDuration());
                     hotPackModel.setPackName(packJSONModel.getPackName());
-                    hotPackModel.setGoal(packJSONModel.getPurpose());
+                    hotPackModel.setType(packJSONModel.getPurpose());
                     hotPackModelList.add(hotPackModel);
                 }
                 hotCoachesAdapter.notifyDataSetChanged();
