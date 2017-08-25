@@ -34,9 +34,7 @@ public class CoverPagerAdapter extends PagerAdapter{
     private List<PackModel> hotPackModelList;
 
 
-    @BindView(R.id.iv_cover)
     ImageView ivCover;
-    @BindView(R.id.tv_cover)
     TextView tvCover;
 
     HotCoachesModel hotCoachesModel;
@@ -67,7 +65,8 @@ public class CoverPagerAdapter extends PagerAdapter{
     public Object instantiateItem(ViewGroup container, int position){
         layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = layoutInflater.inflate(R.layout.swipe_cover, container, false);
-        ButterKnife.bind(this, view);
+        ivCover = (ImageView) view.findViewById(R.id.iv_cover);
+        tvCover = (TextView) view.findViewById(R.id.tv_cover);
 
         if(hotCoachesModelList.size() > 0 && hotSportsModelList.size() > 0 && hotPackModelList.size() > 0){
             int randCoaches = ThreadLocalRandom.current().nextInt(0, hotCoachesModelList.size());

@@ -82,7 +82,6 @@ public class PackAdapter extends RecyclerView.Adapter<PackAdapter.PackViewHolder
 
         public PackViewHolder(View itemView) {
             super(itemView);
-
         }
     }
 }
