@@ -42,20 +42,17 @@ import retrofit2.Response;
  * A simple {@link Fragment} subclass.
  */
 public class HomeFragment extends Fragment {
+    private RecyclerView rvHotCoaches;
+    private RecyclerView rvHotSports;
+    private RecyclerView rvHotPacks;
     @BindView(R.id.tv_hot)
     TextView tvHot;
     @BindView(R.id.cover_pager)
     ViewPager coverPager;
-
-    RecyclerView rvHotCoaches;
-
     @BindView(R.id.tv_hot_sports)
     TextView tvHotSports;
-    RecyclerView rvHotSports;
-
     @BindView(R.id.tv_hot_packs)
     TextView tvHotPacks;
-    RecyclerView rvHotPacks;
 
     private List<HotCoachesModel> hotCoachesModelList = new ArrayList<>();
     private List<HotSportsModel> hotSportsModelList = new ArrayList<>();
@@ -70,7 +67,6 @@ public class HomeFragment extends Fragment {
     public HomeFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -147,7 +143,7 @@ public class HomeFragment extends Fragment {
         hotSportsAdapter = new HotSportsAdapter(hotSportsModelList, getContext());
         rvHotSports.setAdapter(hotSportsAdapter);
 
-        hotPackAdapter = new PackAdapter(hotPackModelList, getContext());
+        hotPackAdapter = new PackAdapter(hotPackModelList, getContext(), view);
         rvHotPacks.setAdapter(hotPackAdapter);
 
         final GridLayoutManager gridLayoutManagerCoaches = new GridLayoutManager(getContext(), 2, GridLayoutManager.HORIZONTAL, false);

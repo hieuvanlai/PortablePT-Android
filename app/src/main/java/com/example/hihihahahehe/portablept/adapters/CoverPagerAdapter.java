@@ -63,7 +63,7 @@ public class CoverPagerAdapter extends PagerAdapter{
 
     @Override
     public Object instantiateItem(ViewGroup container, int position){
-        layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+//        layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = layoutInflater.inflate(R.layout.swipe_cover, container, false);
         ivCover = (ImageView) view.findViewById(R.id.iv_cover);
         tvCover = (TextView) view.findViewById(R.id.tv_cover);

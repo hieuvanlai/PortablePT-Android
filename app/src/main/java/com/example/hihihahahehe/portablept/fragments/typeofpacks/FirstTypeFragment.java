@@ -53,9 +53,8 @@ public class FirstTypeFragment extends Fragment {
 
     private void setupUI(View view) {
         ButterKnife.bind(this, view);
-        packAdapter = new PackAdapter(packModelList, getContext());
+        packAdapter = new PackAdapter(packModelList, getContext(), view);
         rvPacks.setAdapter(packAdapter);
-
         rvPacks.setLayoutManager(new LinearLayoutManager(getContext()));
     }
 

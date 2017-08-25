@@ -39,7 +39,7 @@ public class ManagerPackFragment extends Fragment {
     private FragmentManager fm;
     private List<PackModel> packModelList = new ArrayList<>();
     private FaceBookModel faceBookModel;
-    private PackAdapter packAdapter;
+//    private PackAdapter packAdapter;
 
     @BindView(R.id.iv_back)
     ImageView ivBack;
@@ -59,14 +59,14 @@ public class ManagerPackFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_manager_pack, container, false);
 
         setupUI(view);
-        loadData();
+//        loadData();
         return view;
     }
 
     private void setupListPack() {
-        packAdapter = new PackAdapter(packModelList, getContext());
-        rvPacks.setAdapter(packAdapter);
-        rvPacks.setLayoutManager(new LinearLayoutManager(getContext()));
+//        packAdapter = new PackAdapter(packModelList, getContext());
+//        rvPacks.setAdapter(packAdapter);
+//        rvPacks.setLayoutManager(new LinearLayoutManager(getContext()));
     }
 
     private void loadData() {
@@ -87,7 +87,7 @@ public class ManagerPackFragment extends Fragment {
 
                         packModelList.add(packModel);
                     }
-                    packAdapter.notifyDataSetChanged();
+//                    packAdapter.notifyDataSetChanged();
                 }
             }
 
