@@ -65,7 +65,7 @@ public class CoverPagerAdapter extends PagerAdapter{
 
     @Override
     public Object instantiateItem(ViewGroup container, int position){
-//        layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = layoutInflater.inflate(R.layout.swipe_cover, container, false);
         ButterKnife.bind(this, view);
 
