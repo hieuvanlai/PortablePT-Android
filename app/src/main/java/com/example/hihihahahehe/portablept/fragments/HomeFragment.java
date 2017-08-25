@@ -134,7 +134,7 @@ public class HomeFragment extends Fragment {
     private void setupUI(View view) {
         ButterKnife.bind(this, view);
 
-        coverPagerAdapter = new CoverPagerAdapter(getContext(), hotCoachesModelList, hotSportsModelList);
+        coverPagerAdapter = new CoverPagerAdapter(getContext(), hotCoachesModelList, hotSportsModelList, hotPackModelList);
         coverPager.setAdapter(coverPagerAdapter);
 
         hotCoachesAdapter = new HotCoachesAdapter(hotCoachesModelList, getContext());

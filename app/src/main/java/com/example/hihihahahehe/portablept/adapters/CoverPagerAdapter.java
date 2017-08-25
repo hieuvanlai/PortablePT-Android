@@ -1,16 +1,11 @@
 package com.example.hihihahahehe.portablept.adapters;
 
 import android.content.Context;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,9 +15,7 @@ import com.example.hihihahahehe.portablept.models.HotSportsModel;
 import com.example.hihihahahehe.portablept.models.PackModel;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 import butterknife.BindView;
@@ -38,25 +31,26 @@ public class CoverPagerAdapter extends PagerAdapter{
 
     private List<HotCoachesModel> hotCoachesModelList;
     private List<HotSportsModel> hotSportsModelList;
+    private List<PackModel> hotPackModelList;
 
 
-    @BindView(R.id.iv_coach_cover)
-    ImageView ivCoachCover;
-    @BindView(R.id.tv_coach_cover)
-    TextView tvCoachCover;
+    @BindView(R.id.iv_cover)
+    ImageView ivCover;
+    @BindView(R.id.tv_cover)
+    TextView tvCover;
+
     HotCoachesModel hotCoachesModel;
-
-    @BindView(R.id.iv_sport_cover)
-    ImageView ivSportCover;
-    @BindView(R.id.tv_sport_cover)
-    TextView tvSportCover;
     HotSportsModel hotSportsModel;
+    PackModel hotPackModel;
 
 
-    public CoverPagerAdapter(Context context, List<HotCoachesModel> hotCoachesModelList, List<HotSportsModel> hotSportsModelList) {
+    public CoverPagerAdapter(Context context, List<HotCoachesModel> hotCoachesModelList,
+                             List<HotSportsModel> hotSportsModelList,
+                             List<PackModel> hotPackModelList) {
         this.context = context;
         this.hotCoachesModelList = hotCoachesModelList;
         this.hotSportsModelList = hotSportsModelList;
+        this.hotPackModelList = hotPackModelList;
     }
 
     @Override
@@ -71,44 +65,51 @@ public class CoverPagerAdapter extends PagerAdapter{
 
     @Override
     public Object instantiateItem(ViewGroup container, int position){
-        layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+//        layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = layoutInflater.inflate(R.layout.swipe_cover, container, false);
+        ButterKnife.bind(this, view);
 
-        if(hotCoachesModelList.size() > 0 && hotSportsModelList.size() > 0){
+        if(hotCoachesModelList.size() > 0 && hotSportsModelList.size() > 0 && hotPackModelList.size() > 0){
             int randCoaches = ThreadLocalRandom.current().nextInt(0, hotCoachesModelList.size());
             int randSports = ThreadLocalRandom.current().nextInt(0, hotSportsModelList.size());
+            int randPacks = ThreadLocalRandom.current().nextInt(0, hotPackModelList.size());
+
 
             hotCoachesModel = hotCoachesModelList.get(randCoaches);
             hotSportsModel = hotSportsModelList.get(randSports);
+            hotPackModel = hotPackModelList.get(randPacks);
 
-            setData(hotCoachesModel, hotSportsModel);
+            setData(hotCoachesModel, hotSportsModel, hotPackModel, position);
         }
 
-        int resId = -1;
-        switch (position) {
-            case 0:
-                resId = R.layout.swipe_coach_cover;
-                break;
-            case 1:
-                resId = R.layout.swipe_sport_cover;
-                break;
-            case 2:
-                resId = R.layout.item_list_pack;
-                break;
-        }
-
-        View view = layoutInflater.inflate(resId, container, false);
         ((ViewPager) container).addView(view, 0);
         return view;
     }
 
-    private void setData(HotCoachesModel hotCoachesModel, HotSportsModel hotSportsModel) {
-        ivCoachCover.setImageResource(R.drawable.sample_avatar);
-        tvCoachCover.setText(hotCoachesModel.getName());
+    private void setData(HotCoachesModel hotCoachesModel, HotSportsModel hotSportsModel, PackModel hotPackModel, int position) {
+        switch (position){
+            case 0: {
+                ivCover.setImageResource(R.drawable.sample_avatar);
+                tvCover.setText(hotCoachesModel.getName());
+                break;
+            }
 
-        Picasso.with(context)
-                .load(hotSportsModel.getImageURL())
-                .into(ivSportCover);
-        tvSportCover.setText(hotSportsModel.getName());
+            case 1: {
+                Picasso.with(context)
+                        .load(hotSportsModel.getImageURL())
+                        .into(ivCover);
+                tvCover.setText(hotSportsModel.getName());
+                break;
+            }
+
+            case 2: {
+                tvCover.setText(hotPackModel.getPackName());
+                break;
+            }
+        }
+
+
+
     }
 
     @Override
