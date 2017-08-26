@@ -10,7 +10,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,9 +24,9 @@ import com.example.hihihahahehe.portablept.models.JSONModel.PackJSONModel;
 import com.example.hihihahahehe.portablept.models.JSONModel.SportsJSONModel;
 import com.example.hihihahahehe.portablept.models.PackModel;
 import com.example.hihihahahehe.portablept.networks.RetrofitFactory;
-import com.example.hihihahahehe.portablept.networks.services.GetPacks;
+import com.example.hihihahahehe.portablept.networks.services.GetAllPacks;
+import com.example.hihihahahehe.portablept.networks.services.GetZumbaPacks;
 import com.example.hihihahahehe.portablept.networks.services.GetSports;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -84,8 +83,8 @@ public class HomeFragment extends Fragment {
     }
 
     private void loadData() {
-        final GetPacks getPacks = RetrofitFactory.getInstance().create(GetPacks.class);
-        getPacks.getPacks().enqueue(new Callback<List<PackJSONModel>>() {
+        final GetAllPacks getAllPacks = RetrofitFactory.getInstance().create(GetAllPacks.class);
+        getAllPacks.getAllPacks().enqueue(new Callback<List<PackJSONModel>>() {
             @Override
             public void onResponse(Call<List<PackJSONModel>> call, Response<List<PackJSONModel>> response) {
                 for(PackJSONModel packJSONModel : response.body()){

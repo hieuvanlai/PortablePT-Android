@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,12 +13,11 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.hihihahahehe.portablept.R;
-import com.example.hihihahahehe.portablept.adapters.PackAdapter;
 import com.example.hihihahahehe.portablept.models.FaceBookModel;
 import com.example.hihihahahehe.portablept.models.JSONModel.PackJSONModel;
 import com.example.hihihahahehe.portablept.models.PackModel;
 import com.example.hihihahahehe.portablept.networks.RetrofitFactory;
-import com.example.hihihahahehe.portablept.networks.services.GetPacks;
+import com.example.hihihahahehe.portablept.networks.services.GetZumbaPacks;
 import com.example.hihihahahehe.portablept.utils.RealmHandle;
 import com.example.hihihahahehe.portablept.utils.ScreenManager;
 
@@ -70,9 +68,9 @@ public class ManagerPackFragment extends Fragment {
     }
 
     private void loadData() {
-        final GetPacks getPacks = RetrofitFactory.getInstance().create(GetPacks.class);
+        final GetZumbaPacks getZumbaPacks = RetrofitFactory.getInstance().create(GetZumbaPacks.class);
         faceBookModel = RealmHandle.getData();
-        getPacks.getPacks().enqueue(new Callback<List<PackJSONModel>>() {
+        getZumbaPacks.getZumbaPacks().enqueue(new Callback<List<PackJSONModel>>() {
             @Override
             public void onResponse(Call<List<PackJSONModel>> call, Response<List<PackJSONModel>> response) {
                 if (response.body() != null) {

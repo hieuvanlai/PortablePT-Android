@@ -58,7 +58,7 @@ public class PackAdapter extends RecyclerView.Adapter<PackAdapter.PackViewHolder
         PackModel packModel = packModelList.get(position);
         faceBookModel = RealmHandle.getData();
         holder.tvNamePack.setText(packModel.getPackName());
-        Picasso.with(context).load(faceBookModel.getImg()).transform(new CropCircleTransformation()).into(holder.ivTrainer);
+//        Picasso.with(context).load(faceBookModel.getImg()).transform(new CropCircleTransformation()).into(holder.ivTrainer);
         holder.tvPrice.setText(packModel.getPrice());
         holder.tvType.setText(packModel.getType());
         Picasso.with(context).load(packModel.getImageUrl()).into(holder.ivPack);

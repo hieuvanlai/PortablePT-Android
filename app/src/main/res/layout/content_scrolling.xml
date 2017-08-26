@@ -14,10 +14,10 @@
     <TextView
         android:id="@+id/tv_hot"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="65dp"
         android:padding="15dp"
         android:text="Hot"
-        android:textSize="14sp"
+        android:textSize="20sp"
         android:textColor="#fff"
         android:textStyle="bold" />
 
@@ -34,13 +34,13 @@
     <TextView
         android:id="@+id/tv_hot_coaches"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="65dp"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/cover_pager"
         android:padding="15dp"
         android:textColor="#fff"
         android:text="Huấn luyện viên Hot"
-        android:textSize="14sp"
+        android:textSize="20sp"
         android:textStyle="bold" />
 
     <android.support.v7.widget.RecyclerView
@@ -55,10 +55,10 @@
     <TextView
         android:id="@+id/tv_hot_sports"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="65dp"
         android:padding="15dp"
         android:text="Môn tập Hot"
-        android:textSize="14sp"
+        android:textSize="20sp"
         android:textStyle="bold"
         android:textColor="#fff"
         android:layout_below="@+id/rv_hot_coaches"
@@ -76,10 +76,10 @@
         <TextView
             android:id="@+id/tv_hot_packs"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="65dp"
             android:padding="15dp"
             android:text="Gói tập Hot"
-            android:textSize="14sp"
+            android:textSize="20sp"
             android:textStyle="bold"
             android:textColor="#fff"
             android:layout_below="@+id/rv_hot_sports"
