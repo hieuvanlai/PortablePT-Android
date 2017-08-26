@@ -87,6 +87,7 @@ public class HomeFragment extends Fragment {
         getAllPacks.getAllPacks().enqueue(new Callback<List<PackJSONModel>>() {
             @Override
             public void onResponse(Call<List<PackJSONModel>> call, Response<List<PackJSONModel>> response) {
+
                 for(PackJSONModel packJSONModel : response.body()){
                     HotCoachesModel hotCoachesModel = new HotCoachesModel();
                     hotCoachesModel.setName(packJSONModel.getCoach());
@@ -120,6 +121,9 @@ public class HomeFragment extends Fragment {
                     hotSportsModel.setImageURL(sportsJSONModel.getImageURL());
                     hotSportsModelList.add(hotSportsModel);
                 }
+                coverPagerAdapter = new CoverPagerAdapter(getContext(), hotCoachesModelList, hotSportsModelList, hotPackModelList);
+                coverPager.setAdapter(coverPagerAdapter);
+
                 hotSportsAdapter.notifyDataSetChanged();
             }
 
