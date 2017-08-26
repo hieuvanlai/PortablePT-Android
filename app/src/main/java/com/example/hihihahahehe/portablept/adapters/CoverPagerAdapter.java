@@ -40,7 +40,6 @@ public class CoverPagerAdapter extends PagerAdapter{
     HotSportsModel hotSportsModel;
     PackModel hotPackModel;
 
-
     public CoverPagerAdapter(Context context, List<HotCoachesModel> hotCoachesModelList,
                              List<HotSportsModel> hotSportsModelList,
                              List<PackModel> hotPackModelList) {
