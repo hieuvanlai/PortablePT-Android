@@ -87,6 +87,8 @@ public class CreatePackFragment extends Fragment implements View.OnClickListener
     CheckBox checkBoxT7;
     @BindView(R.id.cb_T5)
     CheckBox checkBoxT5;
+    @BindView(R.id.edt_conten)
+    TextView edt_content;
 
 
 
@@ -185,27 +187,28 @@ public class CreatePackFragment extends Fragment implements View.OnClickListener
                 String price = edtPackPrice.getText().toString() + " VND";
                 String address = edtAddress.getText().toString();
                 String imageUrl = "https://res.cloudinary.com/dekbhfa6g/image/upload/" + edtPackName.getText().toString() + ".jpg";
-                String calender ="" ;
+                String calendar ="" ;
                 if (checkBoxT2.isChecked()){
-                    calender = calender + " T2 ";
+                    calendar = calendar + " T2 ";
                 }
                 if (checkBoxT3.isChecked()){
-                    calender = calender + " T3 ";
+                    calendar = calendar + " T3 ";
                 }
                 if (checkBoxT4.isChecked()){
-                    calender = calender + " T4 ";
+                    calendar = calendar + " T4 ";
                 }
                 if (checkBoxT5.isChecked()){
-                    calender = calender + " T5 ";
+                    calendar = calendar + " T5 ";
                 }
                 if (checkBoxT6.isChecked()){
-                    calender = calender + " T6 ";
+                    calendar = calendar + " T6 ";
                 }
                 if (checkBoxT7.isChecked()){
-                    calender = calender + " T7 ";
+                    calendar = calendar + " T7 ";
                 }
+                String content= edt_content.getText().toString();
 
-                PackJSONModel model = new PackJSONModel(type, packName, coach, price, duration, imageUrl, address,calender);
+                PackJSONModel model = new PackJSONModel(type, packName, coach, price, duration, imageUrl, address,calendar,content);
 
                 addPack.addPack(model).enqueue(new Callback<PackJSONModel>() {
                     @Override

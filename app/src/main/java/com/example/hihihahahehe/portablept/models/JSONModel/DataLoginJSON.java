@@ -25,6 +25,34 @@ public class DataLoginJSON extends RealmObject {
     @SerializedName("role")
     private String role;
 
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setImgAvata(String imgAvata) {
+        this.imgAvata = imgAvata;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
+    }
+
     public void setRole(String role) {
         this.role = role;
     }

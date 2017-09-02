@@ -19,9 +19,18 @@ public class PackJSONModel{
     private String duration;
     private String packImgUrl;
     private String address;
-    private String calender;
+    private String calendar;
+    private String content;
 
-    public PackJSONModel(String purpose, String packName, String coach, String price, String duration, String packImgUrl, String address,String calender) {
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public PackJSONModel(String purpose, String packName, String coach, String price, String duration, String packImgUrl, String address, String calendar,String content) {
         this.purpose = purpose;
         this.packName = packName;
         this.coach = coach;
@@ -29,18 +38,19 @@ public class PackJSONModel{
         this.duration = duration;
         this.packImgUrl = packImgUrl;
         this.address = address;
-        this.calender= calender;
+        this.calendar= calendar;
+        this.content = content;
     }
 
     public PackJSONModel() {
     }
 
     public String getCalender() {
-        return calender;
+        return calendar;
     }
 
     public void setCalender(String calender) {
-        this.calender = calender;
+        this.calendar = calender;
     }
 
     public String getPackImgUrl() {
