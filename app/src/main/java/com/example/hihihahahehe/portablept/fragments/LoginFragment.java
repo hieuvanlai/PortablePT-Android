@@ -18,7 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.hihihahahehe.portablept.R;
-import com.example.hihihahahehe.portablept.databases.RealmHandleAccout;
+import com.example.hihihahahehe.portablept.databases.RealmHandleAccount;
 import com.example.hihihahahehe.portablept.models.FaceBookModel;
 import com.example.hihihahahehe.portablept.models.JSONModel.LoginAndRegisterResponseJSON;
 import com.example.hihihahahehe.portablept.models.JSONModel.LoginJSON;
@@ -93,11 +93,11 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         } catch (NoSuchAlgorithmException e) {
 
         }
-        if (RealmHandleAccout.getAccout()!=null){
-            LoginAndRegisterResponseJSON loginAndRegisterResponseJSON = RealmHandleAccout.getAccout();
+        if (RealmHandleAccount.getAccount()!=null){
+            LoginAndRegisterResponseJSON loginAndRegisterResponseJSON = RealmHandleAccount.getAccount();
 
             if (loginAndRegisterResponseJSON.getData().getRole().equals("HLV")||loginAndRegisterResponseJSON.getData().getRole().equals("HV")){
-                Log.d("ROLE",RealmHandleAccout.getAccout().getData().getRole());
+                Log.d("ROLE", RealmHandleAccount.getAccount().getData().getRole());
                 ScreenManager.replaceFragment(getActivity().getSupportFragmentManager(), new FirstScreenFragment(), R.id.layout_container_main, false);
 
             }
@@ -222,8 +222,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                         Toast.makeText(getActivity(), "Bạn Nhập Sai Mật Khẩu", Toast.LENGTH_SHORT).show();
                     }
                     if (loginAndRegisterResponseJSON.getMessage().equals("Login OK")){
-                        RealmHandleAccout.deleteAccout();
-                        RealmHandleAccout.addAccout(loginAndRegisterResponseJSON);
+                        RealmHandleAccount.deleteAccount();
+                        RealmHandleAccount.addAccount(loginAndRegisterResponseJSON);
                         if (loginAndRegisterResponseJSON.getData().getRole()!="HLV"||loginAndRegisterResponseJSON.getData().getRole()!="HV"){
 
                             ScreenManager.openFragment(getActivity().getSupportFragmentManager(), new RoleFragment(),R.id.layout_container_main, false);

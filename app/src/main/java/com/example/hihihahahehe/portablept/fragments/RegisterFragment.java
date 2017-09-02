@@ -1,10 +1,8 @@
 package com.example.hihihahahehe.portablept.fragments;
 
 
-import android.media.Image;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,21 +14,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.hihihahahehe.portablept.R;
-import com.example.hihihahahehe.portablept.databases.RealmHandleAccout;
+import com.example.hihihahahehe.portablept.databases.RealmHandleAccount;
 import com.example.hihihahahehe.portablept.models.FaceBookModel;
-import com.example.hihihahahehe.portablept.models.HotSportsModel;
 import com.example.hihihahahehe.portablept.models.JSONModel.LoginAndRegisterResponseJSON;
 import com.example.hihihahahehe.portablept.models.JSONModel.UserJSONModel;
 import com.example.hihihahahehe.portablept.networks.RetrofitFactory;
 import com.example.hihihahahehe.portablept.networks.services.RegisterAccout;
 import com.example.hihihahahehe.portablept.utils.ScreenManager;
-import com.example.hihihahahehe.portablept.utils.Utils;
 import com.squareup.picasso.Picasso;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
-
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -148,8 +142,8 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
                     if (registerResponseJSON.getMessage().equals("Register failed, duplicate user")){
                         Toast.makeText(getActivity(),"Tài Khoản Đã Tồn Tại ", Toast.LENGTH_SHORT).show();
                     }else{
-                        RealmHandleAccout.deleteAccout();
-                        RealmHandleAccout.addAccout(registerResponseJSON);
+                        RealmHandleAccount.deleteAccount();
+                        RealmHandleAccount.addAccount(registerResponseJSON);
                         ScreenManager.openFragment(getActivity().getSupportFragmentManager(), new RoleFragment(),R.id.layout_container_main, false);
                     }
 

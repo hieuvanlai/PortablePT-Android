@@ -11,11 +11,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.hihihahahehe.portablept.R;
-import com.example.hihihahahehe.portablept.databases.RealmHandleAccout;
+import com.example.hihihahahehe.portablept.databases.RealmHandleAccount;
 import com.example.hihihahahehe.portablept.details.ClientDetailsFragment;
 import com.example.hihihahahehe.portablept.models.JSONModel.LoginAndRegisterResponseJSON;
 import com.example.hihihahahehe.portablept.utils.ScreenManager;
-import com.example.hihihahahehe.portablept.models.FaceBookModel;
 import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
@@ -58,8 +57,8 @@ public class PersonFragment extends Fragment {
     }
 
     public void loadData() {
-        if (RealmHandleAccout.getAccout() != null) {
-            LoginAndRegisterResponseJSON loginAndRegisterResponseJSON = RealmHandleAccout.getAccout();
+        if (RealmHandleAccount.getAccount() != null) {
+            LoginAndRegisterResponseJSON loginAndRegisterResponseJSON = RealmHandleAccount.getAccount();
             Picasso.with(getContext()).load(loginAndRegisterResponseJSON.getData().getImgAvata()).transform(new CropCircleTransformation()).into(ivAvatar);
             tvName.setText(loginAndRegisterResponseJSON.getData().getName());
         }

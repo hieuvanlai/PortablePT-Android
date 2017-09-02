@@ -10,15 +10,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.example.hihihahahehe.portablept.R;
-import com.example.hihihahahehe.portablept.databases.RealmHandleAccout;
+import com.example.hihihahahehe.portablept.databases.RealmHandleAccount;
 import com.example.hihihahahehe.portablept.models.FaceBookModel;
-import com.example.hihihahahehe.portablept.models.JSONModel.PackJSONModel;
 import com.example.hihihahahehe.portablept.models.PackModel;
-import com.example.hihihahahehe.portablept.networks.RetrofitFactory;
-import com.example.hihihahahehe.portablept.networks.services.GetZumbaPacks;
 import com.example.hihihahahehe.portablept.utils.ScreenManager;
 
 import java.util.ArrayList;
@@ -26,9 +22,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -66,7 +59,7 @@ public class ManagerPackFragment extends Fragment {
 
     private void setupUI(View view) {
         ButterKnife.bind(this, view);
-        if (RealmHandleAccout.getAccout().getData().getRole().equals("HV")){
+        if (RealmHandleAccount.getAccount().getData().getRole().equals("HV")){
             fabAddPack.setVisibility(View.INVISIBLE);
         }
         setOnClickItem();

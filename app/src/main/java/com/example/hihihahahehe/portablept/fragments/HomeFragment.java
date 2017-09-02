@@ -47,6 +47,7 @@ public class HomeFragment extends Fragment {
     private RecyclerView rvHotCoaches;
     private RecyclerView rvHotSports;
     private RecyclerView rvHotPacks;
+    private static final String TAG = "HomeFragment";
 
     CarouselView carouselView;
     int[] sampleImages = {R.drawable.sample_avatar, R.drawable.sample_sports};
@@ -112,6 +113,11 @@ public class HomeFragment extends Fragment {
                     hotPackModel.setDuration(packJSONModel.getDuration());
                     hotPackModel.setPackName(packJSONModel.getPackName());
                     hotPackModel.setType(packJSONModel.getPurpose());
+                    hotPackModel.setImg(packJSONModel.getPackImgUrl());
+
+                    if(packJSONModel.getTotalStars() != null && packJSONModel.getVotedStars() != null){
+                        hotPackModel.setStars((int)(packJSONModel.getTotalStars().intValue()/packJSONModel.getVotedStars().intValue()));
+                    }
                     Log.d("TEST",packJSONModel.getPrice());
                     hotPackModelList.add(hotPackModel);
                 }

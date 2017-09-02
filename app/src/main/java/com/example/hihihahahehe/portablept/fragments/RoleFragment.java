@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.hihihahahehe.portablept.R;
-import com.example.hihihahahehe.portablept.databases.RealmHandleAccout;
+import com.example.hihihahahehe.portablept.databases.RealmHandleAccount;
 import com.example.hihihahahehe.portablept.models.JSONModel.MassegeResponseJSON;
 import com.example.hihihahahehe.portablept.models.JSONModel.RoleJSON;
 import com.example.hihihahahehe.portablept.networks.RetrofitFactory;
@@ -61,7 +61,7 @@ public class RoleFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 RoleJSON roleJSON = new RoleJSON();
-                roleJSON.setId(RealmHandleAccout.getAccout().getData().getId());
+                roleJSON.setId(RealmHandleAccount.getAccount().getData().getId());
                 roleJSON.setRole("HV");
                 updateRole(roleJSON);
             }
@@ -71,7 +71,7 @@ public class RoleFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 RoleJSON roleJSON = new RoleJSON();
-                roleJSON.setId(RealmHandleAccout.getAccout().getData().getId());
+                roleJSON.setId(RealmHandleAccount.getAccount().getData().getId());
                 roleJSON.setRole("HLV");
                 updateRole(roleJSON);
             }
@@ -85,7 +85,7 @@ public class RoleFragment extends Fragment {
             public void onResponse(Call<MassegeResponseJSON> call, Response<MassegeResponseJSON> response) {
                 MassegeResponseJSON massegeResponseJSON =response.body();
                 if (massegeResponseJSON.getMessage().equals("Update OK")){
-                    RealmHandleAccout.UpdateAccout(roleJSON.getRole());
+                    RealmHandleAccount.UpdateAccount(roleJSON.getRole());
                     fm = getActivity().getSupportFragmentManager();
                     ScreenManager.replaceFragment(fm,
                             new FirstScreenFragment(), R.id.layout_container_main, false);

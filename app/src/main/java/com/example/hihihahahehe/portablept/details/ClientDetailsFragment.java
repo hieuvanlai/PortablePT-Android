@@ -14,13 +14,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.hihihahahehe.portablept.R;
-import com.example.hihihahahehe.portablept.databases.RealmHandleAccout;
-import com.example.hihihahahehe.portablept.models.FaceBookModel;
+import com.example.hihihahahehe.portablept.databases.RealmHandleAccount;
 import com.example.hihihahahehe.portablept.models.JSONModel.DataLoginJSON;
 import com.example.hihihahahehe.portablept.models.JSONModel.LoginAndRegisterResponseJSON;
-import com.example.hihihahahehe.portablept.models.JSONModel.MassegeResponseJSON;
 import com.example.hihihahahehe.portablept.networks.RetrofitFactory;
-import com.example.hihihahahehe.portablept.networks.services.UpdateRole;
 import com.example.hihihahahehe.portablept.networks.services.UpdateUser;
 import com.squareup.picasso.Picasso;
 
@@ -71,8 +68,8 @@ public class ClientDetailsFragment extends Fragment {
                     return;
                 }
                 DataLoginJSON dataLoginJSON   =  new DataLoginJSON();
-                dataLoginJSON.setId(RealmHandleAccout.getAccout().getData().getId());
-                dataLoginJSON.setImgAvata(RealmHandleAccout.getAccout().getData().getImgAvata());
+                dataLoginJSON.setId(RealmHandleAccount.getAccount().getData().getId());
+                dataLoginJSON.setImgAvata(RealmHandleAccount.getAccount().getData().getImgAvata());
                 dataLoginJSON.setBirthday(edtBirthDay.getText().toString());
                 dataLoginJSON.setPhoneNumber(edt_phone.getText().toString());
                 dataLoginJSON.setEmail(edtEmail.getText().toString());
@@ -85,8 +82,8 @@ public class ClientDetailsFragment extends Fragment {
                         Log.d("Tesst",response.toString());
                         if (massegeResponseJSON.getMessage().equals("Update OK")){
                             Toast.makeText(getActivity(), "Cập Nhập Thành Công", Toast.LENGTH_SHORT).show();
-                            RealmHandleAccout.deleteAccout();
-                            RealmHandleAccout.addAccout(massegeResponseJSON);
+                            RealmHandleAccount.deleteAccount();
+                            RealmHandleAccount.addAccount(massegeResponseJSON);
 
                         }
 
@@ -113,8 +110,8 @@ public class ClientDetailsFragment extends Fragment {
     }
 
     public void loadInfo() {
-        if(RealmHandleAccout.getAccout() != null){
-            LoginAndRegisterResponseJSON loginAndRegisterResponseJSON = RealmHandleAccout.getAccout();
+        if(RealmHandleAccount.getAccount() != null){
+            LoginAndRegisterResponseJSON loginAndRegisterResponseJSON = RealmHandleAccount.getAccount();
             Picasso.with(getContext()).load(loginAndRegisterResponseJSON.getData().getImgAvata()).transform(new CropCircleTransformation()).into(ivAvatar);
             edt_phone.setText(loginAndRegisterResponseJSON.getData().getPhoneNumber());
             edtName.setText(loginAndRegisterResponseJSON.getData().getName());

@@ -23,7 +23,7 @@ import android.widget.Toast;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import com.example.hihihahahehe.portablept.R;
-import com.example.hihihahahehe.portablept.databases.RealmHandleAccout;
+import com.example.hihihahahehe.portablept.databases.RealmHandleAccount;
 import com.example.hihihahahehe.portablept.models.FaceBookModel;
 import com.example.hihihahahehe.portablept.models.HotSportsModel;
 import com.example.hihihahahehe.portablept.models.JSONModel.PackJSONModel;
@@ -183,7 +183,7 @@ public class CreatePackFragment extends Fragment implements View.OnClickListener
 
 
                 packName = String.valueOf(edtPackName.getText());
-                String coach = RealmHandleAccout.getAccout().getData().getId();
+                String coach = RealmHandleAccount.getAccount().getData().getId();
                 String price = edtPackPrice.getText().toString() + " VND";
                 String address = edtAddress.getText().toString();
                 String imageUrl = "https://res.cloudinary.com/dekbhfa6g/image/upload/" + edtPackName.getText().toString() + ".jpg";

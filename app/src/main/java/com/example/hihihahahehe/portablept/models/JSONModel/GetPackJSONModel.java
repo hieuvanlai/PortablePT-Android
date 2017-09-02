@@ -29,27 +29,36 @@ public class GetPackJSONModel {
 
     @SerializedName("duration")
     private String duration;
+
+    @SerializedName("coutStar")
+    private Integer totalStars;
+
+    @SerializedName("voteStar")
+    private Integer votedStars;
+
     private String packName;
+
+    @SerializedName("packImgUrl")
     private String packImgUrl;
+
     private String address;
-    private String calender;
-    private Integer coutStar;
-    private Integer voteStar;
+    private String calendar;
 
-    public Integer getCoutStar() {
-        return coutStar;
+
+    public Integer getTotalStars() {
+        return totalStars;
     }
 
-    public void setCoutStar(Integer coutStar) {
-        this.coutStar = coutStar;
+    public void setTotalStars(Integer totalStars) {
+        this.totalStars = totalStars;
     }
 
-    public Integer getVoteStar() {
-        return voteStar;
+    public Integer getVotedStars() {
+        return votedStars;
     }
 
-    public void setVoteStar(Integer voteStar) {
-        this.voteStar = voteStar;
+    public void setVotedStars(Integer votedStars) {
+        this.votedStars = votedStars;
     }
 
     public DataLoginJSON getCoach() {
@@ -63,12 +72,12 @@ public class GetPackJSONModel {
     public GetPackJSONModel() {
     }
 
-    public String getCalender() {
-        return calender;
+    public String getCalendar() {
+        return calendar;
     }
 
-    public void setCalender(String calender) {
-        this.calender = calender;
+    public void setCalendar(String calendar) {
+        this.calendar = calendar;
     }
 
     public String getPackImgUrl() {

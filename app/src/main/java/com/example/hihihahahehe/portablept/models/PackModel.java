@@ -12,6 +12,15 @@ public class PackModel {
     private String duration;
     private String img;
     private String type;
+    private int stars;
+
+    public int getStars() {
+        return stars;
+    }
+
+    public void setStars(int stars) {
+        this.stars = stars;
+    }
 
     public String getPrice() {
         return price;
