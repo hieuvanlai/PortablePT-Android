@@ -89,26 +89,7 @@
                     android:textSize="14sp" />
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/tv_city_hint"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:text="Thành phố * " />
-
-                <EditText
-                    android:id="@+id/edt_city"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:textSize="14sp" />
-            </LinearLayout>
         </LinearLayout>
 
         <TextView
@@ -182,6 +163,7 @@
 
         <TextView
             android:layout_width="200dp"
+            android:id="@+id/tv_updateAccout"
             android:layout_height="wrap_content"
             android:layout_below="@id/linear_layout_2"
             android:layout_centerHorizontal="true"
