@@ -7,6 +7,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,7 @@ import com.example.hihihahahehe.portablept.adapters.HotSportsAdapter;
 import com.example.hihihahahehe.portablept.adapters.PackAdapter;
 import com.example.hihihahahehe.portablept.models.HotCoachesModel;
 import com.example.hihihahahehe.portablept.models.HotSportsModel;
+import com.example.hihihahahehe.portablept.models.JSONModel.GetPackJSONModel;
 import com.example.hihihahahehe.portablept.models.JSONModel.PackJSONModel;
 import com.example.hihihahahehe.portablept.models.JSONModel.SportsJSONModel;
 import com.example.hihihahahehe.portablept.models.PackModel;
@@ -27,6 +29,8 @@ import com.example.hihihahahehe.portablept.networks.RetrofitFactory;
 import com.example.hihihahahehe.portablept.networks.services.GetAllPacks;
 import com.example.hihihahahehe.portablept.networks.services.GetZumbaPacks;
 import com.example.hihihahahehe.portablept.networks.services.GetSports;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -84,21 +88,22 @@ public class HomeFragment extends Fragment {
 
     private void loadData() {
         final GetAllPacks getAllPacks = RetrofitFactory.getInstance().create(GetAllPacks.class);
-        getAllPacks.getAllPacks().enqueue(new Callback<List<PackJSONModel>>() {
+        getAllPacks.getAllPacks().enqueue(new Callback<List<GetPackJSONModel>>() {
             @Override
-            public void onResponse(Call<List<PackJSONModel>> call, Response<List<PackJSONModel>> response) {
+            public void onResponse(Call<List<GetPackJSONModel>> call, Response<List<GetPackJSONModel>> response) {
 
-                for(PackJSONModel packJSONModel : response.body()){
+                for(GetPackJSONModel packJSONModel : response.body()){
                     HotCoachesModel hotCoachesModel = new HotCoachesModel();
-                    hotCoachesModel.setName(packJSONModel.getCoach());
+                    hotCoachesModel.setName(packJSONModel.getCoach().getName());
                     hotCoachesModelList.add(hotCoachesModel);
 
                     PackModel hotPackModel = new PackModel();
-                    hotPackModel.setCoachName(packJSONModel.getCoach());
+                    hotPackModel.setCoachName(packJSONModel.getCoach().getName());
                     hotPackModel.setPrice(packJSONModel.getPrice());
                     hotPackModel.setDuration(packJSONModel.getDuration());
                     hotPackModel.setPackName(packJSONModel.getPackName());
                     hotPackModel.setType(packJSONModel.getPurpose());
+                    Log.d("TEST",packJSONModel.getPrice());
                     hotPackModelList.add(hotPackModel);
                 }
                 hotCoachesAdapter.notifyDataSetChanged();
@@ -106,7 +111,7 @@ public class HomeFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<List<PackJSONModel>> call, Throwable t) {
+            public void onFailure(Call<List<GetPackJSONModel>> call, Throwable t) {
                 Toast.makeText(getContext(), "Failed to load hot coaches into HomeFragment", Toast.LENGTH_SHORT);
             }
         });
@@ -123,6 +128,7 @@ public class HomeFragment extends Fragment {
                 }
                 coverPagerAdapter = new CoverPagerAdapter(getContext(), hotCoachesModelList, hotSportsModelList, hotPackModelList);
                 coverPager.setAdapter(coverPagerAdapter);
+                EventBus.getDefault().postSticky(hotSportsModelList);
 
                 hotSportsAdapter.notifyDataSetChanged();
             }

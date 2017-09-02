@@ -3,16 +3,19 @@ package com.example.hihihahahehe.portablept.models.JSONModel;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * Created by hihihahahehe on 8/17/17.
+ * Created by hieuit on 9/2/17.
  */
 
-public class PackJSONModel{
-
+public class GetPackJSONModel {
+    @SerializedName("_id")
+    private String id;
     @SerializedName("purpose")
     private String purpose;
     private String packName;
     @SerializedName("coach")
-    private String coach;
+
+
+    private DataLoginJSON coach;
     @SerializedName("price")
     private String price;
     @SerializedName("duration")
@@ -21,18 +24,15 @@ public class PackJSONModel{
     private String address;
     private String calender;
 
-    public PackJSONModel(String purpose, String packName, String coach, String price, String duration, String packImgUrl, String address,String calender) {
-        this.purpose = purpose;
-        this.packName = packName;
-        this.coach = coach;
-        this.price = price;
-        this.duration = duration;
-        this.packImgUrl = packImgUrl;
-        this.address = address;
-        this.calender= calender;
+    public DataLoginJSON getCoach() {
+        return coach;
     }
 
-    public PackJSONModel() {
+    public void setCoach(DataLoginJSON coach) {
+        this.coach = coach;
+    }
+
+    public GetPackJSONModel() {
     }
 
     public String getCalender() {
@@ -75,13 +75,7 @@ public class PackJSONModel{
         this.packName = packName;
     }
 
-    public String getCoach() {
-        return coach;
-    }
 
-    public void setCoach(String coach) {
-        this.coach = coach;
-    }
 
     public String getPrice() {
         return price;

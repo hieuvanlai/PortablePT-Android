@@ -7,17 +7,32 @@ package com.example.hihihahahehe.portablept.models;
 public class PackModel {
     private String packName;
     private String coachName;
-    private String type;
-    private String price;
+    private String goal;
+    private String cost;
     private String duration;
-    private String imageUrl;
+    private String img;
+    private String type;
 
-    public String getImageUrl() {
-        return imageUrl;
+    public String getPrice() {
+        return price;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    private String price;
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
     }
 
     public PackModel() {
@@ -39,20 +54,20 @@ public class PackModel {
         this.coachName = coachName;
     }
 
-    public String getType() {
-        return type;
+    public String getGoal() {
+        return goal;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setGoal(String goal) {
+        this.goal = goal;
     }
 
-    public String getPrice() {
-        return price;
+    public String getCost() {
+        return cost;
     }
 
-    public void setPrice(String price) {
-        this.price = price;
+    public void setCost(String cost) {
+        this.cost = cost;
     }
 
     public String getDuration() {
@@ -61,5 +76,9 @@ public class PackModel {
 
     public void setDuration(String duration) {
         this.duration = duration;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
     }
 }

@@ -50,7 +50,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         FacebookSdk.sdkInitialize(getApplicationContext());
-        Realm.init(getApplicationContext());
         ScreenManager.openFragment(getSupportFragmentManager(), new LoginFragment(), R.id.layout_container_main, false);
     }
 }

@@ -1,50 +1,42 @@
 package com.example.hihihahahehe.portablept.fragments;
 
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cloudinary.Cloudinary;
-import com.cloudinary.Transformation;
-import com.cloudinary.android.Utils;
 import com.cloudinary.utils.ObjectUtils;
 import com.example.hihihahahehe.portablept.R;
+import com.example.hihihahahehe.portablept.databases.RealmHandleAccout;
 import com.example.hihihahahehe.portablept.models.FaceBookModel;
+import com.example.hihihahahehe.portablept.models.HotSportsModel;
 import com.example.hihihahahehe.portablept.models.JSONModel.PackJSONModel;
 import com.example.hihihahahehe.portablept.networks.RetrofitFactory;
 import com.example.hihihahahehe.portablept.networks.services.AddPack;
-import com.example.hihihahahehe.portablept.utils.RealmHandle;
 import com.example.hihihahahehe.portablept.utils.ScreenManager;
 
-import java.io.File;
+import org.greenrobot.eventbus.Subscribe;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -71,8 +63,6 @@ public class CreatePackFragment extends Fragment implements View.OnClickListener
     EditText edtPackName;
     @BindView(R.id.edt_pack_price)
     EditText edtPackPrice;
-    @BindView(R.id.edt_phone)
-    EditText edtPhone;
     @BindView(R.id.bt_cancel)
     TextView btCancel;
     @BindView(R.id.bt_create)
@@ -85,10 +75,27 @@ public class CreatePackFragment extends Fragment implements View.OnClickListener
     ImageView ivAddImage;
     @BindView(R.id.edt_address)
     EditText edtAddress;
+    @BindView(R.id.cb_T2)
+    CheckBox checkBoxT2;
+    @BindView(R.id.cb_T3)
+    CheckBox checkBoxT3;
+    @BindView(R.id.cb_T4)
+    CheckBox checkBoxT4;
+    @BindView(R.id.cb_T6)
+    CheckBox checkBoxT6;
+    @BindView(R.id.cb_T7)
+    CheckBox checkBoxT7;
+    @BindView(R.id.cb_T5)
+    CheckBox checkBoxT5;
+
+
+
 
     public CreatePackFragment() {
         // Required empty public constructor
     }
+    int checkdata =0;
+    private ArrayAdapter<String> arrayAdapter;
 
 
     @Override
@@ -117,11 +124,8 @@ public class CreatePackFragment extends Fragment implements View.OnClickListener
     private void showChooseTypeDialog() {
         AlertDialog.Builder chooseType = new AlertDialog.Builder(getContext());
 
-        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1);
+        arrayAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1);
         arrayAdapter.add("Fitness");
-        arrayAdapter.add("Zumba");
-        arrayAdapter.add("Kickfit");
-
         chooseType.setAdapter(arrayAdapter, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
@@ -174,15 +178,34 @@ public class CreatePackFragment extends Fragment implements View.OnClickListener
                 new UploadService().execute();
                 final AddPack addPack = RetrofitFactory.getInstance().create(AddPack.class);
 
-                faceBookModel = RealmHandle.getData();
-                String phoneNumber = edtPhone.getText().toString();
+
+
                 packName = String.valueOf(edtPackName.getText());
-                String coach = faceBookModel.getLast_Name() + " " + faceBookModel.getFirst_Name();
+                String coach = RealmHandleAccout.getAccout().getData().getId();
                 String price = edtPackPrice.getText().toString() + " VND";
                 String address = edtAddress.getText().toString();
                 String imageUrl = "https://res.cloudinary.com/dekbhfa6g/image/upload/" + edtPackName.getText().toString() + ".jpg";
+                String calender ="" ;
+                if (checkBoxT2.isChecked()){
+                    calender = calender + " T2 ";
+                }
+                if (checkBoxT3.isChecked()){
+                    calender = calender + " T3 ";
+                }
+                if (checkBoxT4.isChecked()){
+                    calender = calender + " T4 ";
+                }
+                if (checkBoxT5.isChecked()){
+                    calender = calender + " T5 ";
+                }
+                if (checkBoxT6.isChecked()){
+                    calender = calender + " T6 ";
+                }
+                if (checkBoxT7.isChecked()){
+                    calender = calender + " T7 ";
+                }
 
-                PackJSONModel model = new PackJSONModel(phoneNumber, type, packName, coach, price, duration, imageUrl, address);
+                PackJSONModel model = new PackJSONModel(type, packName, coach, price, duration, imageUrl, address,calender);
 
                 addPack.addPack(model).enqueue(new Callback<PackJSONModel>() {
                     @Override
@@ -232,5 +255,18 @@ public class CreatePackFragment extends Fragment implements View.OnClickListener
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    //get Pack Type
+    @Subscribe(sticky = true)
+    public  void onRecivedPack (List<HotSportsModel>  hotSportsModelList){
+        if (checkdata==0){
+            arrayAdapter.clear();
+            for(int i = 0; i < hotSportsModelList.size(); i++){
+                    arrayAdapter.add(hotSportsModelList.get(i).getName());
+            }
+            checkdata=1;
+        }
+
+
     }
 }

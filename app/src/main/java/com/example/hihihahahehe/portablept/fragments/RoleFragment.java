@@ -10,12 +10,18 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.hihihahahehe.portablept.R;
-import com.example.hihihahahehe.portablept.models.FaceBookModel;
-import com.example.hihihahahehe.portablept.utils.RealmHandle;
+import com.example.hihihahahehe.portablept.databases.RealmHandleAccout;
+import com.example.hihihahahehe.portablept.models.JSONModel.MassegeResponseJSON;
+import com.example.hihihahahehe.portablept.models.JSONModel.RoleJSON;
+import com.example.hihihahahehe.portablept.networks.RetrofitFactory;
+import com.example.hihihahahehe.portablept.networks.services.UpdateRole;
 import com.example.hihihahahehe.portablept.utils.ScreenManager;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by valky on 8/7/2017.
@@ -54,18 +60,42 @@ public class RoleFragment extends Fragment {
         tvTrainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ScreenManager.replaceFragment(fm,
-                        new FirstScreenFragment(), R.id.layout_container_main, false);
+                RoleJSON roleJSON = new RoleJSON();
+                roleJSON.setId(RealmHandleAccout.getAccout().getData().getId());
+                roleJSON.setRole("HV");
+                updateRole(roleJSON);
             }
         });
 
         tvTrainee.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ScreenManager.replaceFragment(fm,
-                        new FirstScreenFragment(), R.id.layout_container_main, false);
+                RoleJSON roleJSON = new RoleJSON();
+                roleJSON.setId(RealmHandleAccout.getAccout().getData().getId());
+                roleJSON.setRole("HLV");
+                updateRole(roleJSON);
             }
         });
 
+    }
+    private void updateRole(final RoleJSON roleJSON){
+        UpdateRole updateRole = RetrofitFactory.getInstance().create(UpdateRole.class);
+        updateRole.updateRole(roleJSON).enqueue(new Callback<MassegeResponseJSON>() {
+            @Override
+            public void onResponse(Call<MassegeResponseJSON> call, Response<MassegeResponseJSON> response) {
+                MassegeResponseJSON massegeResponseJSON =response.body();
+                if (massegeResponseJSON.getMessage().equals("Update OK")){
+                    RealmHandleAccout.UpdateAccout(roleJSON.getRole());
+                    fm = getActivity().getSupportFragmentManager();
+                    ScreenManager.replaceFragment(fm,
+                            new FirstScreenFragment(), R.id.layout_container_main, false);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MassegeResponseJSON> call, Throwable t) {
+
+            }
+        });
     }
 }

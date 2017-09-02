@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">PortablePT</string>
-    <string name="facebook_app_id">144792232775233</string>
+    <string name="facebook_app_id">1883397265244371</string>
     <string name="fb_login_protocol_scheme">fb144792232775233</string>
 
     <!-- TODO: Remove or change this placeholder text -->
@@ -95,5 +95,8 @@
         "For example, position the FAB to one side of stream of a cards so the FAB won’t interfere "
         "when a user tries to pick up one of cards.\n\n"
     </string>
+    <string name="user_name">User Name</string>
+    <string name="password">Password</string>
+    <string name="rerister">No account yet? Create one</string>
     <string name="action_settings">Settings</string>
 </resources>

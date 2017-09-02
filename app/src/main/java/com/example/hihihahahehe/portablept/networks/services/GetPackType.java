@@ -7,12 +7,13 @@ import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 
 /**
- * Created by valky on 8/25/2017.
+ * Created by hieuit on 8/25/17.
  */
 
-public interface GetAllPacks {
-    @GET("get-pack-all")
-    Call<List<GetPackJSONModel>> getAllPacks();
+public interface GetPackType {
+    @GET("get-pack-add/{type}")
+    Call<List<GetPackJSONModel>> getPacks(@Path("type") String id);
 }

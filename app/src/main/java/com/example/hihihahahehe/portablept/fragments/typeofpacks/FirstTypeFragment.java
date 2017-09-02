@@ -17,7 +17,6 @@ import com.example.hihihahahehe.portablept.models.JSONModel.PackJSONModel;
 import com.example.hihihahahehe.portablept.models.PackModel;
 import com.example.hihihahahehe.portablept.networks.RetrofitFactory;
 import com.example.hihihahahehe.portablept.networks.services.GetZumbaPacks;
-import com.example.hihihahahehe.portablept.utils.RealmHandle;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,7 +59,7 @@ public class FirstTypeFragment extends Fragment {
 
     private void loadData() {
         final GetZumbaPacks getZumbaPacks = RetrofitFactory.getInstance().create(GetZumbaPacks.class);
-        faceBookModel = RealmHandle.getData();
+
         getZumbaPacks.getZumbaPacks().enqueue(new Callback<List<PackJSONModel>>() {
             @Override
             public void onResponse(Call<List<PackJSONModel>> call, Response<List<PackJSONModel>> response) {
@@ -72,7 +71,7 @@ public class FirstTypeFragment extends Fragment {
                         packModel.setType(packJSONModel.getPurpose());
                         packModel.setPrice(packJSONModel.getPrice());
                         packModel.setDuration(packJSONModel.getDuration());
-                        packModel.setImageUrl(packJSONModel.getPackImgUrl());
+                        packModel.setImg(packJSONModel.getPackImgUrl());
 
                         packModelList.add(packModel);
                     }

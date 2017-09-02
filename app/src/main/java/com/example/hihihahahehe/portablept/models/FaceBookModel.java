@@ -9,44 +9,16 @@ import io.realm.RealmObject;
  * Created by hieuv on 8/8/2017.
  */
 
-public class FaceBookModel extends RealmObject{
-    private String Id;
-    private String Img;
-    private String First_Name;
-    private String Last_Name;
-    private String Email;
-    private String Gender;
-    private String Birthday;
-    private String Location;
-    private String phone;
-    private boolean isTrainer = false;
 
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-
-    public boolean isTrainer() {
-        return isTrainer;
-    }
-
-    public void setTrainer(boolean trainer) {
-        isTrainer = trainer;
-    }
-
-    public boolean isFirstTime() {
-        return isFirstTime;
-    }
-
-    public void setFirstTime(boolean firstTime) {
-        isFirstTime = firstTime;
-    }
-
-    private boolean isFirstTime;
+public class FaceBookModel {
+    String Id;
+    String Img;
+    String First_Name;
+    String Last_Name;
+    String Email;
+    String Gender;
+    String Birthday;
+    String Location;
 
     public String getId() {
         return Id;
@@ -112,3 +84,4 @@ public class FaceBookModel extends RealmObject{
         Location = location;
     }
 }
+

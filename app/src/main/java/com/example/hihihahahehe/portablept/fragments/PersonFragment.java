@@ -11,8 +11,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.hihihahahehe.portablept.R;
+import com.example.hihihahahehe.portablept.databases.RealmHandleAccout;
 import com.example.hihihahahehe.portablept.details.ClientDetailsFragment;
-import com.example.hihihahahehe.portablept.utils.RealmHandle;
+import com.example.hihihahahehe.portablept.models.JSONModel.LoginAndRegisterResponseJSON;
 import com.example.hihihahahehe.portablept.utils.ScreenManager;
 import com.example.hihihahahehe.portablept.models.FaceBookModel;
 import com.squareup.picasso.Picasso;
@@ -36,7 +37,6 @@ public class PersonFragment extends Fragment {
     CardView cvMyPack;
     private ClientDetailsFragment clientProfile;
     private ManagerPackFragment managerPackFragment;
-    private FaceBookModel faceBookModel;
 
     public PersonFragment() {
         // Required empty public constructor
@@ -58,20 +58,10 @@ public class PersonFragment extends Fragment {
     }
 
     public void loadData() {
-        if (RealmHandle.getData() != null) {
-            faceBookModel = RealmHandle.getData();
-
-            Picasso.with(getContext()).load(faceBookModel.getImg()).transform(new CropCircleTransformation()).into(ivAvatar);
-            String firstName;
-            String lastName;
-            if (faceBookModel.getFirst_Name() == null) {
-                firstName = "";
-            } else firstName = faceBookModel.getFirst_Name();
-
-            if (faceBookModel.getLast_Name() == null) {
-                lastName = "";
-            } else lastName = faceBookModel.getLast_Name();
-            tvName.setText(lastName + " " + firstName);
+        if (RealmHandleAccout.getAccout() != null) {
+            LoginAndRegisterResponseJSON loginAndRegisterResponseJSON = RealmHandleAccout.getAccout();
+            Picasso.with(getContext()).load(loginAndRegisterResponseJSON.getData().getImgAvata()).transform(new CropCircleTransformation()).into(ivAvatar);
+            tvName.setText(loginAndRegisterResponseJSON.getData().getName());
         }
     }
 

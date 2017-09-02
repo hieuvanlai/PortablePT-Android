@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="5dp">
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="150dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <View
+                android:layout_width="5dp"
+                android:layout_height="match_parent"
+                android:id="@+id/v_color"
+                android:layout_marginEnd="10dp"
+                android:background="@color/colorPrimary"/>
+            <TextView
+                android:layout_marginTop="5dp"
+                android:id="@+id/tv_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tên"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:layout_toRightOf="@id/v_color"
+                />
+            <TextView
+                android:id="@+id/tv_duration"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Thời gian dự kiến"
+                android:layout_below="@id/tv_name"
+                android:layout_toRightOf="@id/v_color"
+                android:layout_marginTop="10dp"/>
+            <TextView
+                android:id="@+id/tv_goal"
+                android:layout_marginTop="10dp"
+                android:layout_toEndOf="@id/v_color"
+                android:layout_below="@id/tv_duration"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Mục tiêu"/>
+
+            <TextView
+                android:id="@+id/tv_cost"
+                android:layout_marginTop="10dp"
+                android:layout_toEndOf="@id/v_color"
+                android:layout_below="@id/tv_goal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Giá"/>
+
+            <android.support.v7.widget.AppCompatRatingBar
+                android:layout_toRightOf="@id/v_color"
+                style="?android:attr/ratingBarStyleIndicator"
+                android:numStars="5"
+                android:layout_below="@+id/tv_cost"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

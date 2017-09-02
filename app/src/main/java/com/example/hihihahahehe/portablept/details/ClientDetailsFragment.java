@@ -1,7 +1,6 @@
 package com.example.hihihahahehe.portablept.details;
 
 
-import android.hardware.camera2.params.Face;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -10,16 +9,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.example.hihihahahehe.portablept.R;
-import com.example.hihihahahehe.portablept.events.OnLoginEvent;
+import com.example.hihihahahehe.portablept.databases.RealmHandleAccout;
 import com.example.hihihahahehe.portablept.models.FaceBookModel;
-import com.example.hihihahahehe.portablept.utils.RealmHandle;
+import com.example.hihihahahehe.portablept.models.JSONModel.LoginAndRegisterResponseJSON;
 import com.squareup.picasso.Picasso;
-
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -41,9 +36,11 @@ public class ClientDetailsFragment extends Fragment {
     EditText edtBirthDay;
     @BindView(R.id.edt_gen)
     EditText edtGen;
+    @BindView(R.id.edt_phone)
+    EditText edt_phone;
     @BindView(R.id.iv_avatar)
     ImageView ivAvatar;
-    private FaceBookModel faceBookModel;
+
 
     public ClientDetailsFragment() {
         // Required empty public constructor
@@ -64,27 +61,14 @@ public class ClientDetailsFragment extends Fragment {
     }
 
     public void loadInfo() {
-        faceBookModel = RealmHandle.getData();
-        if(faceBookModel != null){
-            Picasso.with(getContext()).load(faceBookModel.getImg()).transform(new CropCircleTransformation()).into(ivAvatar);
-            String firstName;
-            String lastName;
-            if(faceBookModel.getFirst_Name() == null){
-                firstName = "";
-            } else firstName = faceBookModel.getFirst_Name();
+        if(RealmHandleAccout.getAccout() != null){
+            LoginAndRegisterResponseJSON loginAndRegisterResponseJSON = RealmHandleAccout.getAccout();
+            Picasso.with(getContext()).load(loginAndRegisterResponseJSON.getData().getImgAvata()).transform(new CropCircleTransformation()).into(ivAvatar);
+            edt_phone.setText(loginAndRegisterResponseJSON.getData().getPhoneNumber());
+            edtName.setText(loginAndRegisterResponseJSON.getData().getName());
+            edtEmail.setText(loginAndRegisterResponseJSON.getData().getEmail());
+            edtBirthDay.setText(loginAndRegisterResponseJSON.getData().getBirthday());
 
-            if(faceBookModel.getLast_Name() == null){
-                lastName = "";
-            } else lastName = faceBookModel.getLast_Name();
-            edtName.setText(lastName + " " + firstName);
-            edtEmail.setText(faceBookModel.getEmail());
-            edtBirthDay.setText(faceBookModel.getBirthday());
-            edtCity.setText(faceBookModel.getLocation());
-            if(faceBookModel.getGender().equals("male")){
-                edtGen.setText("Nam");
-            } else if(faceBookModel.getGender().equals("female")){
-                edtGen.setText("Nữ");
-            }
         }
     }
 

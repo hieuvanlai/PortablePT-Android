@@ -2,33 +2,26 @@ package com.example.hihihahahehe.portablept.adapters;
 
 import android.animation.ValueAnimator;
 import android.content.Context;
-import android.net.Uri;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.WindowManager;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.hihihahahehe.portablept.R;
 import com.example.hihihahahehe.portablept.models.FaceBookModel;
 import com.example.hihihahahehe.portablept.models.PackModel;
-import com.example.hihihahahehe.portablept.utils.RealmHandle;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import io.realm.Realm;
-import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 
 /**
  * Created by hihihahahehe on 8/15/17.
@@ -46,6 +39,11 @@ public class PackAdapter extends RecyclerView.Adapter<PackAdapter.PackViewHolder
         this.context = context;
     }
 
+    public PackAdapter(List<PackModel> packModelList, Context context) {
+        this.packModelList = packModelList;
+        this.context = context;
+    }
+
     @Override
     public PackViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.item_list_pack, null);
@@ -56,12 +54,11 @@ public class PackAdapter extends RecyclerView.Adapter<PackAdapter.PackViewHolder
     @Override
     public void onBindViewHolder(PackViewHolder holder, int position) {
         PackModel packModel = packModelList.get(position);
-        faceBookModel = RealmHandle.getData();
+
         holder.tvNamePack.setText(packModel.getPackName());
-//        Picasso.with(context).load(faceBookModel.getImg()).transform(new CropCircleTransformation()).into(holder.ivTrainer);
-        holder.tvPrice.setText(packModel.getPrice());
+        holder.tvPrice.setText(packModel.getCost());
         holder.tvType.setText(packModel.getType());
-        Picasso.with(context).load(packModel.getImageUrl()).into(holder.ivPack);
+        Picasso.with(context).load(packModel.getImg()).into(holder.ivPack);
     }
 
     @Override
