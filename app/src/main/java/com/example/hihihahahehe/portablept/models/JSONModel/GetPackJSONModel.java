@@ -10,6 +10,14 @@ public class GetPackJSONModel {
     @SerializedName("_id")
     private String id;
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     @SerializedName("purpose")
     private String purpose;
 
@@ -21,11 +29,28 @@ public class GetPackJSONModel {
 
     @SerializedName("duration")
     private String duration;
-
     private String packName;
     private String packImgUrl;
     private String address;
     private String calender;
+    private Integer coutStar;
+    private Integer voteStar;
+
+    public Integer getCoutStar() {
+        return coutStar;
+    }
+
+    public void setCoutStar(Integer coutStar) {
+        this.coutStar = coutStar;
+    }
+
+    public Integer getVoteStar() {
+        return voteStar;
+    }
+
+    public void setVoteStar(Integer voteStar) {
+        this.voteStar = voteStar;
+    }
 
     public DataLoginJSON getCoach() {
         return coach;

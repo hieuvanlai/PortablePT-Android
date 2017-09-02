@@ -6,6 +6,11 @@ package com.example.hihihahahehe.portablept.models.JSONModel;
 
 public class MassegeResponseJSON {
     private String message;
+    private DataLoginJSON use;
+
+    public DataLoginJSON getUse() {
+        return use;
+    }
 
     public String getMessage() {
         return message;

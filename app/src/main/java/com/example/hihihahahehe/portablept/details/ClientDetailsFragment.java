@@ -4,6 +4,7 @@ package com.example.hihihahahehe.portablept.details;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,8 +41,7 @@ public class ClientDetailsFragment extends Fragment {
     EditText edtName;
     @BindView(R.id.edt_email)
     EditText edtEmail;
-    @BindView(R.id.edt_city)
-    EditText edtCity;
+
     @BindView(R.id.edt_birth)
     EditText edtBirthDay;
     @BindView(R.id.edt_gen)
@@ -78,15 +78,26 @@ public class ClientDetailsFragment extends Fragment {
                 dataLoginJSON.setEmail(edtEmail.getText().toString());
                 dataLoginJSON.setName(edtName.getText().toString());
                 UpdateUser updateUser = RetrofitFactory.getInstance().create(UpdateUser.class);
-                updateUser.update(dataLoginJSON).enqueue(new Callback<MassegeResponseJSON>() {
+                updateUser.update(dataLoginJSON).enqueue(new Callback<LoginAndRegisterResponseJSON>() {
                     @Override
-                    public void onResponse(Call<MassegeResponseJSON> call, Response<MassegeResponseJSON> response) {
+                    public void onResponse(Call<LoginAndRegisterResponseJSON> call, Response<LoginAndRegisterResponseJSON> response) {
+                        LoginAndRegisterResponseJSON massegeResponseJSON =response.body();
+                        Log.d("Tesst",response.toString());
+                        if (massegeResponseJSON.getMessage().equals("Update OK")){
+                            Toast.makeText(getActivity(), "Cập Nhập Thành Công", Toast.LENGTH_SHORT).show();
+                            RealmHandleAccout.deleteAccout();
+                            RealmHandleAccout.addAccout(massegeResponseJSON);
 
+                        }
+
+                            if (massegeResponseJSON.equals("Database error, could not find User")){
+                                Toast.makeText(getActivity(), "Cập Nhập Thất Bại", Toast.LENGTH_SHORT).show();
+                            }
                     }
 
                     @Override
-                    public void onFailure(Call<MassegeResponseJSON> call, Throwable t) {
-
+                    public void onFailure(Call<LoginAndRegisterResponseJSON> call, Throwable t) {
+                        Toast.makeText(getActivity(), "Lỗi Mạng", Toast.LENGTH_SHORT).show();
                     }
                 });
 
