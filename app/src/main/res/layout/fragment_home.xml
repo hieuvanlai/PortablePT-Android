@@ -2,10 +2,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#303030"
+    android:background="#240b29"
     tools:context="com.example.hihihahahehe.portablept.fragments.NotificationFragment">
 
-    <include layout="@layout/content_scrolling"/>
+    <include layout="@layout/content_scrolling" />
 
 
 </RelativeLayout>

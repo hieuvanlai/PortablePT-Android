@@ -11,32 +11,34 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/tv_hot"
-        android:layout_width="match_parent"
-        android:layout_height="65dp"
-        android:padding="15dp"
-        android:text="Hot"
-        android:textSize="20sp"
-        android:textColor="#fff"
-        android:textStyle="bold" />
+        <com.synnapps.carouselview.CarouselView
+            android:id="@+id/carouselView"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            app:fillColor="#FFFFFFFF"
+            app:pageColor="#00000000"
+            app:radius="6dp"
+            app:slideInterval="3000"
+            app:strokeColor="#FF777777"
+            app:strokeWidth="1dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true" />
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/cover_pager"
-        android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:scaleType="centerCrop"
-        android:layout_below="@+id/tv_hot"
-        android:layout_alignParentStart="true">
+    <!--<android.support.v4.view.ViewPager-->
+        <!--android:id="@+id/cover_pager"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="250dp"-->
+        <!--android:scaleType="centerCrop"-->
+        <!--android:layout_alignParentStart="true">-->
 
-    </android.support.v4.view.ViewPager>
+    <!--</android.support.v4.view.ViewPager>-->
 
     <TextView
         android:id="@+id/tv_hot_coaches"
         android:layout_width="match_parent"
         android:layout_height="65dp"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/cover_pager"
+        android:layout_below="@+id/carouselView"
         android:padding="15dp"
         android:textColor="#fff"
         android:text="Huấn luyện viên Hot"

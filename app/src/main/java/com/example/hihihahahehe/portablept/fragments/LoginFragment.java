@@ -96,11 +96,12 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         if (RealmHandleAccout.getAccout()!=null){
             LoginAndRegisterResponseJSON loginAndRegisterResponseJSON = RealmHandleAccout.getAccout();
 
-            if (loginAndRegisterResponseJSON.getData().getRole().equals("HVL")||loginAndRegisterResponseJSON.getData().getRole().equals("HV")){
+            if (loginAndRegisterResponseJSON.getData().getRole().equals("HLV")||loginAndRegisterResponseJSON.getData().getRole().equals("HV")){
                 Log.d("ROLE",RealmHandleAccout.getAccout().getData().getRole());
                 ScreenManager.replaceFragment(getActivity().getSupportFragmentManager(), new FirstScreenFragment(), R.id.layout_container_main, false);
 
-            }else {
+            }
+            else {
                 ScreenManager.replaceFragment(getActivity().getSupportFragmentManager(), new RoleFragment(), R.id.layout_container_main, false);
 
             }

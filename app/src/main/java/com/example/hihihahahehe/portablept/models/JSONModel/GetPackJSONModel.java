@@ -9,17 +9,20 @@ import com.google.gson.annotations.SerializedName;
 public class GetPackJSONModel {
     @SerializedName("_id")
     private String id;
+
     @SerializedName("purpose")
     private String purpose;
-    private String packName;
+
     @SerializedName("coach")
-
-
     private DataLoginJSON coach;
+
     @SerializedName("price")
     private String price;
+
     @SerializedName("duration")
     private String duration;
+
+    private String packName;
     private String packImgUrl;
     private String address;
     private String calender;
