@@ -13,11 +13,9 @@ public class GetPackJSONModel {
     public String getId() {
         return id;
     }
-
     public void setId(String id) {
         this.id = id;
     }
-
     @SerializedName("purpose")
     private String purpose;
 
@@ -43,7 +41,11 @@ public class GetPackJSONModel {
 
     private String address;
     private String calendar;
+    private String content;
 
+    public String getContent() {
+        return content;
+    }
 
     public Integer getTotalStars() {
         return totalStars;

@@ -10,6 +10,15 @@ public class HotCoachesModel {
 
     public HotCoachesModel() {
     }
+    private String avata;
+
+    public String getAvata() {
+        return avata;
+    }
+
+    public void setAvata(String avata) {
+        this.avata = avata;
+    }
 
     public HotCoachesModel(String id, String name) {
         this.id = id;

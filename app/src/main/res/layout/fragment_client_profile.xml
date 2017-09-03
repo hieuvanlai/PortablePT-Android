@@ -34,7 +34,7 @@
         </RelativeLayout>
 
         <ImageView
-            android:id="@+id/iv_avatar"
+            android:id="@+id/iv_avatarUser"
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:layout_below="@+id/relative_layout"
@@ -45,7 +45,7 @@
             android:id="@+id/tv_name_hint"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/iv_avatar"
+            android:layout_below="@+id/iv_avatarUser"
             android:padding="5dp"
             android:text="Họ và tên * " />
 

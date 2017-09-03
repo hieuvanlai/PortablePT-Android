@@ -163,7 +163,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
             public void onCompleted(JSONObject object, GraphResponse response) {
                 faceBookModel = new FaceBookModel();
                 try {
-
                     faceBookModel.setId(object.getString("id"));
                     faceBookModel.setFirst_Name(object.getString("first_name"));
                     faceBookModel.setLast_Name(object.getString("last_name"));

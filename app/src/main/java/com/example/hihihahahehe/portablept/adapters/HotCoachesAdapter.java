@@ -72,7 +72,7 @@ public class HotCoachesAdapter extends RecyclerView.Adapter<HotCoachesAdapter.Ho
         public void setData(HotCoachesModel hotCoachesModel){
             if(hotCoachesModel != null){
                 tvCoachName.setText(hotCoachesModel.getName());
-                Picasso.with(context).load(R.drawable.sample_avatar)
+                Picasso.with(context).load(hotCoachesModel.getAvata())
                         .transform(new CropCircleTransformation())
                         .into(ivCoachImage);
             }

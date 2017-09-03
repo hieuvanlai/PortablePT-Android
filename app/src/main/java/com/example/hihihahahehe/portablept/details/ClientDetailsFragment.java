@@ -45,8 +45,8 @@ public class ClientDetailsFragment extends Fragment {
     EditText edtGen;
     @BindView(R.id.edt_phone)
     EditText edt_phone;
-    @BindView(R.id.iv_avatar)
-    ImageView ivAvatar;
+    @BindView(R.id.iv_avatarUser)
+    ImageView iv_avatarUser;
     @BindView(R.id.tv_updateAccout)
     TextView tv_update;
 
@@ -84,7 +84,6 @@ public class ClientDetailsFragment extends Fragment {
                             Toast.makeText(getActivity(), "Cập Nhập Thành Công", Toast.LENGTH_SHORT).show();
                             RealmHandleAccount.deleteAccount();
                             RealmHandleAccount.addAccount(massegeResponseJSON);
-
                         }
 
                             if (massegeResponseJSON.equals("Database error, could not find User")){
@@ -112,7 +111,7 @@ public class ClientDetailsFragment extends Fragment {
     public void loadInfo() {
         if(RealmHandleAccount.getAccount() != null){
             LoginAndRegisterResponseJSON loginAndRegisterResponseJSON = RealmHandleAccount.getAccount();
-            Picasso.with(getContext()).load(loginAndRegisterResponseJSON.getData().getImgAvata()).transform(new CropCircleTransformation()).into(ivAvatar);
+            Picasso.with(getContext()).load(loginAndRegisterResponseJSON.getData().getImgAvata()).transform(new CropCircleTransformation()).into(iv_avatarUser);
             edt_phone.setText(loginAndRegisterResponseJSON.getData().getPhoneNumber());
             edtName.setText(loginAndRegisterResponseJSON.getData().getName());
             edtEmail.setText(loginAndRegisterResponseJSON.getData().getEmail());

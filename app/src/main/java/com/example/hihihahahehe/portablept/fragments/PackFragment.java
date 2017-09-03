@@ -22,6 +22,7 @@ import com.example.hihihahahehe.portablept.models.JSONModel.PackJSONModel;
 import com.example.hihihahahehe.portablept.models.PackModel;
 import com.example.hihihahahehe.portablept.networks.RetrofitFactory;
 import com.example.hihihahahehe.portablept.networks.services.GetPackType;
+import com.example.hihihahahehe.portablept.utils.ScreenManager;
 import com.example.hihihahahehe.portablept.utils.Utils;
 
 import org.greenrobot.eventbus.EventBus;
@@ -51,6 +52,7 @@ public class PackFragment extends Fragment {
     RecyclerView  rvHotPacks;
     private PackAdapter hotPackAdapter;
     private List<PackModel> hotPackModelList = new ArrayList<>();
+    private DetailFragment detailfragment;
     public PackFragment() {
         // Required empty public constructor
     }
@@ -69,6 +71,12 @@ public class PackFragment extends Fragment {
                     hotPackModel.setPackName(packJSONModel.getPackName());
                     hotPackModel.setGoal(packJSONModel.getPurpose());
                     hotPackModel.setImg(packJSONModel.getPackImgUrl());
+                    hotPackModel.setCoach(packJSONModel.getCoach());
+                    hotPackModel.setContent(packJSONModel.getContent());
+                    hotPackModel.setId(packJSONModel.getId());
+                    if(packJSONModel.getTotalStars() != null && packJSONModel.getVotedStars() != null){
+                        hotPackModel.setStars((int)(packJSONModel.getTotalStars().intValue()/packJSONModel.getVotedStars().intValue()));
+                    }
                     hotPackModelList.add(hotPackModel);
                 }
                 hotPackAdapter.notifyDataSetChanged();
@@ -97,6 +105,16 @@ public class PackFragment extends Fragment {
 
         hotPackAdapter = new PackAdapter(hotPackModelList, getContext());
         rvHotPacks.setAdapter(hotPackAdapter);
+        hotPackAdapter.setOnclikListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PackModel  packModel = (PackModel) view.getTag();
+                EventBus.getDefault().postSticky(packModel);
+                detailfragment = new DetailFragment();
+                ScreenManager.replaceFragment(getActivity().getSupportFragmentManager(), detailfragment, R.id.layout_container, false);
+
+            }
+        });
         rvHotPacks.setLayoutManager(linearLayoutManagerPacks);
 
 
@@ -108,7 +126,6 @@ public class PackFragment extends Fragment {
                     HotSportsModel hotSportsModel = hotSportsModelList.get(tab.getPosition());
                     loadPack(hotSportsModel);
                 }
-
             }
 
             @Override
@@ -136,6 +153,7 @@ public class PackFragment extends Fragment {
         }
 
     }
+
 
 
 

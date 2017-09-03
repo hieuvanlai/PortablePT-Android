@@ -1,5 +1,7 @@
 package com.example.hihihahahehe.portablept.models;
 
+import com.example.hihihahahehe.portablept.models.JSONModel.DataLoginJSON;
+
 /**
  * Created by valky on 8/10/2017.
  */
@@ -13,6 +15,33 @@ public class PackModel {
     private String img;
     private String type;
     private int stars;
+    private DataLoginJSON coach;
+    private String content;
+    private String id;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public DataLoginJSON getCoach() {
+        return coach;
+    }
+
+    public void setCoach(DataLoginJSON coach) {
+        this.coach = coach;
+    }
 
     public int getStars() {
         return stars;

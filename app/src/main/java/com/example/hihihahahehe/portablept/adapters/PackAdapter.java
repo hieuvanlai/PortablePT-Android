@@ -38,6 +38,10 @@ public class PackAdapter extends RecyclerView.Adapter<PackAdapter.PackViewHolder
     private Context context;
     private FaceBookModel faceBookModel;
     private int minHeight;
+    private View.OnClickListener onclickListener;
+    public void setOnclikListener(View.OnClickListener onclickListener) {
+        this.onclickListener = onclickListener;
+    }
 
     public PackAdapter(List<PackModel> packModelList, Context context, View view) {
         this.packModelList = packModelList;
@@ -51,7 +55,9 @@ public class PackAdapter extends RecyclerView.Adapter<PackAdapter.PackViewHolder
 
     @Override
     public PackViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+
         View view = LayoutInflater.from(context).inflate(R.layout.item_list_pack_hot, null);
+        view.setOnClickListener(onclickListener);
         PackViewHolder viewHolder = new PackViewHolder(view);
         return viewHolder;
     }
@@ -59,15 +65,8 @@ public class PackAdapter extends RecyclerView.Adapter<PackAdapter.PackViewHolder
     @Override
     public void onBindViewHolder(PackViewHolder holder, int position) {
         PackModel packModel = packModelList.get(position);
+        holder.setData(packModel);
 
-        holder.tvName.setText(packModel.getPackName());
-        holder.tvCost.setText(packModel.getCost());
-        holder.tvGoal.setText(packModel.getType());
-        holder.tvPackCoach.setText(packModel.getCoachName());
-        holder.rbPackRating.setProgress(packModel.getStars());
-        Picasso.with(context).load(packModel.getImg()).into(holder.ivPackBackground);
-        holder.ivPackBackground.setAlpha(70);
-        holder.ivPackBackground.setScaleType(ImageView.ScaleType.CENTER_CROP);
     }
 
     @Override
@@ -91,6 +90,7 @@ public class PackAdapter extends RecyclerView.Adapter<PackAdapter.PackViewHolder
         CardView cvPack;
         @BindView(R.id.rb_pack_rating)
         AppCompatRatingBar rbPackRating;
+        View view;
 
         public PackViewHolder(View itemView) {
             super(itemView);
@@ -110,58 +110,28 @@ public class PackAdapter extends RecyclerView.Adapter<PackAdapter.PackViewHolder
                     layoutParams.height = minHeight;
                     cvPack.setLayoutParams(layoutParams);
                     return true;
+
                 }
             });
+            view=itemView;
 
-//            cvPack.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    toggleCardViewHeight(height);
-//                }
-//            });
+
+        }
+
+        public void setData(PackModel packModel){
+            tvName.setText(packModel.getPackName());
+            tvCost.setText(packModel.getCost());
+            tvGoal.setText(packModel.getType());
+            tvPackCoach.setText(packModel.getCoachName());
+            rbPackRating.setProgress(packModel.getStars());
+            Picasso.with(context).load(packModel.getImg()).into(ivPackBackground);
+            ivPackBackground.setAlpha(70);
+            ivPackBackground.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            if (packModel!=null){
+                itemView.setTag(packModel);
+            }
         }
     }
-//        private void toggleCardViewHeight(int height) {
-//
-//            if (cvPack.getHeight() == minHeight) {
-//                expandView(height);
-//            } else {
-//                collapseView();
-//            }
-//        }
-//
-//        public void collapseView() {
-//
-//            ValueAnimator anim = ValueAnimator.ofInt(cvPack.getMeasuredHeightAndState(),
-//                    minHeight);
-//            anim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-//                @Override
-//                public void onAnimationUpdate(ValueAnimator valueAnimator) {
-//                    int val = (Integer) valueAnimator.getAnimatedValue();
-//                    ViewGroup.LayoutParams layoutParams = cvPack.getLayoutParams();
-//                    layoutParams.height = val;
-//                    cvPack.setLayoutParams(layoutParams);
-//
-//                }
-//            });
-//            anim.start();
-//        }
-//
-//        public void expandView(int height) {
-//
-//            ValueAnimator anim = ValueAnimator.ofInt(cvPack.getMeasuredHeightAndState(),
-//                    height);
-//            anim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-//                @Override
-//                public void onAnimationUpdate(ValueAnimator valueAnimator) {
-//                    int val = (Integer) valueAnimator.getAnimatedValue();
-//                    ViewGroup.LayoutParams layoutParams = cvPack.getLayoutParams();
-//                    layoutParams.height = val;
-//                    cvPack.setLayoutParams(layoutParams);
-//                }
-//            });
-//            anim.start();
-//        }
-//    }
+
 }
 

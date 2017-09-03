@@ -14,7 +14,7 @@ public class DataLoginJSON extends RealmObject {
     private String id;
     @SerializedName("username")
     private String username;
-    @SerializedName("imgAvata")
+    @SerializedName("imgAvatar")
     private String imgAvata;
     @SerializedName("name")
     private String name;

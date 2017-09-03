@@ -20,11 +20,13 @@ import com.example.hihihahahehe.portablept.adapters.HotSportsAdapter;
 import com.example.hihihahahehe.portablept.adapters.PackAdapter;
 import com.example.hihihahahehe.portablept.models.HotCoachesModel;
 import com.example.hihihahahehe.portablept.models.HotSportsModel;
+import com.example.hihihahahehe.portablept.models.JSONModel.DataLoginJSON;
 import com.example.hihihahahehe.portablept.models.JSONModel.GetPackJSONModel;
 import com.example.hihihahahehe.portablept.models.JSONModel.SportsJSONModel;
 import com.example.hihihahahehe.portablept.models.PackModel;
 import com.example.hihihahahehe.portablept.networks.RetrofitFactory;
 import com.example.hihihahahehe.portablept.networks.services.GetAllPacks;
+import com.example.hihihahahehe.portablept.networks.services.GetCoach;
 import com.example.hihihahahehe.portablept.networks.services.GetSports;
 import com.synnapps.carouselview.CarouselView;
 import com.synnapps.carouselview.ImageListener;
@@ -103,10 +105,6 @@ public class HomeFragment extends Fragment {
             public void onResponse(Call<List<GetPackJSONModel>> call, Response<List<GetPackJSONModel>> response) {
 
                 for(GetPackJSONModel packJSONModel : response.body()){
-                    HotCoachesModel hotCoachesModel = new HotCoachesModel();
-                    hotCoachesModel.setName(packJSONModel.getCoach().getName());
-                    hotCoachesModelList.add(hotCoachesModel);
-
                     PackModel hotPackModel = new PackModel();
                     hotPackModel.setCoachName(packJSONModel.getCoach().getName());
                     hotPackModel.setPrice(packJSONModel.getPrice());
@@ -121,13 +119,31 @@ public class HomeFragment extends Fragment {
                     Log.d("TEST",packJSONModel.getPrice());
                     hotPackModelList.add(hotPackModel);
                 }
-                hotCoachesAdapter.notifyDataSetChanged();
+
                 hotPackAdapter.notifyDataSetChanged();
             }
 
             @Override
             public void onFailure(Call<List<GetPackJSONModel>> call, Throwable t) {
                 Toast.makeText(getContext(), "Failed to load hot coaches into HomeFragment", Toast.LENGTH_SHORT);
+            }
+        });
+        GetCoach getCoach = RetrofitFactory.getInstance().create(GetCoach.class);
+        getCoach.getCoach().enqueue(new Callback<List<DataLoginJSON>>() {
+            @Override
+            public void onResponse(Call<List<DataLoginJSON>> call, Response<List<DataLoginJSON>> response) {
+                for(DataLoginJSON coachJSONModel : response.body()){
+                    HotCoachesModel hotCoachesModel = new HotCoachesModel();
+                    hotCoachesModel.setName(coachJSONModel.getName());
+                    hotCoachesModel.setAvata(coachJSONModel.getImgAvata());
+                    hotCoachesModelList.add(hotCoachesModel);
+                }
+                hotCoachesAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onFailure(Call<List<DataLoginJSON>> call, Throwable t) {
+
             }
         });
 
