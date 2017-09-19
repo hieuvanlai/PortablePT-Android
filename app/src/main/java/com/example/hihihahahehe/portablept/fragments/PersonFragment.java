@@ -34,8 +34,9 @@ public class PersonFragment extends Fragment {
     ImageView ivAvatar;
     @BindView(R.id.cv_my_pack)
     CardView cvMyPack;
-    private ClientDetailsFragment clientProfile;
-    private ManagerPackFragment managerPackFragment;
+    @BindView(R.id.cv_lock_out)
+    CardView cvlockout;
+
 
     public PersonFragment() {
         // Required empty public constructor
@@ -68,16 +69,22 @@ public class PersonFragment extends Fragment {
         cvInformation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                clientProfile = new ClientDetailsFragment();
-                ScreenManager.replaceFragment(getActivity().getSupportFragmentManager(), clientProfile, R.id.layout_container, true);
+                ScreenManager.replaceFragment(getActivity().getSupportFragmentManager(), new ClientDetailsFragment(), R.id.layout_container, true);
             }
         });
 
         cvMyPack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                managerPackFragment = new ManagerPackFragment();
-                ScreenManager.replaceFragment(getActivity().getSupportFragmentManager(), managerPackFragment, R.id.layout_container, true);
+
+                ScreenManager.replaceFragment(getActivity().getSupportFragmentManager(), new ManagerPackFragment(), R.id.layout_container, true);
+            }
+        });
+        cvlockout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                RealmHandleAccount.deleteAccount();
+                ScreenManager.openFragment(getActivity().getSupportFragmentManager(), new LoginFragment(), R.id.layout_container, false);
             }
         });
     }

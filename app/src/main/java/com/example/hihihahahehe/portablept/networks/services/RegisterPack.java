@@ -1,6 +1,7 @@
 package com.example.hihihahahehe.portablept.networks.services;
 
 import com.example.hihihahahehe.portablept.models.JSONModel.MassegeResponseJSON;
+import com.example.hihihahahehe.portablept.models.JSONModel.RegisterPackJSON;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -12,5 +13,5 @@ import retrofit2.http.POST;
 
 public interface RegisterPack {
     @POST("register-pack")
-    Call<MassegeResponseJSON>  register(@Body RegisterPack registerPack);
+    Call<MassegeResponseJSON>  register(@Body RegisterPackJSON registerPack);
 }

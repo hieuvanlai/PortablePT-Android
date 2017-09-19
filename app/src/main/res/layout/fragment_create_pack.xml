@@ -34,8 +34,9 @@
     <ImageView
         android:id="@+id/iv_add_image"
         android:layout_gravity="center"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:scaleType="fitCenter"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
         android:src="@drawable/ic_image_add_button"/>
 
     <LinearLayout

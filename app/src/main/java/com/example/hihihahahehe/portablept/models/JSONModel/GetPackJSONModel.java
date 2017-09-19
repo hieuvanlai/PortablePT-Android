@@ -38,10 +38,24 @@ public class GetPackJSONModel {
 
     @SerializedName("packImgUrl")
     private String packImgUrl;
+    private String type;
+
 
     private String address;
     private String calendar;
     private String content;
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
 
     public String getContent() {
         return content;
@@ -72,6 +86,7 @@ public class GetPackJSONModel {
     }
 
     public GetPackJSONModel() {
+
     }
 
     public String getCalendar() {

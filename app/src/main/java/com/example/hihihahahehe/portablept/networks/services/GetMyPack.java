@@ -1,6 +1,7 @@
 package com.example.hihihahahehe.portablept.networks.services;
 
 import com.example.hihihahahehe.portablept.models.JSONModel.GetPackJSONModel;
+import com.example.hihihahahehe.portablept.models.JSONModel.MyPackJSONModel;
 
 import java.util.List;
 
@@ -14,5 +15,5 @@ import retrofit2.http.Path;
 
 public interface GetMyPack {
     @GET("get-my-pack/{id}")
-    Call<List<GetPackJSONModel>> getPacks(@Path("id") String id);
+    Call<List<MyPackJSONModel>> getPacks(@Path("id") String id);
 }

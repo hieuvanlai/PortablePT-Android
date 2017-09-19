@@ -48,7 +48,9 @@ public class PackFragment extends Fragment {
     @BindView(R.id.tab_layout)
     TabLayout tabLayout;
     int checkdata=0;
+
     private List<HotSportsModel> hotSportsModelList;
+    @BindView(R.id.rv_pack)
     RecyclerView  rvHotPacks;
     private PackAdapter hotPackAdapter;
     private List<PackModel> hotPackModelList = new ArrayList<>();
@@ -63,7 +65,6 @@ public class PackFragment extends Fragment {
             @Override
             public void onResponse(Call<List<GetPackJSONModel>> call, Response<List<GetPackJSONModel>> response) {
                 for(GetPackJSONModel packJSONModel : response.body()){
-
                     PackModel hotPackModel = new PackModel();
                     hotPackModel.setCoachName(packJSONModel.getCoach().getName());
                     hotPackModel.setCost(packJSONModel.getPrice());
@@ -72,6 +73,8 @@ public class PackFragment extends Fragment {
                     hotPackModel.setGoal(packJSONModel.getPurpose());
                     hotPackModel.setImg(packJSONModel.getPackImgUrl());
                     hotPackModel.setCoach(packJSONModel.getCoach());
+                    hotPackModel.setType(packJSONModel.getType());
+                    hotPackModel.setContent(packJSONModel.getContent());
                     hotPackModel.setContent(packJSONModel.getContent());
                     hotPackModel.setId(packJSONModel.getId());
                     if(packJSONModel.getTotalStars() != null && packJSONModel.getVotedStars() != null){
@@ -99,7 +102,6 @@ public class PackFragment extends Fragment {
         EventBus.getDefault().register(this);
         View view = inflater.inflate(R.layout.fragment_pack, container, false);
         ButterKnife.bind(this, view);
-        rvHotPacks = (RecyclerView) view.findViewById(R.id.rv_pack);
         Utils.addTab(tabLayout,"");
         final LinearLayoutManager linearLayoutManagerPacks = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
 
@@ -110,8 +112,7 @@ public class PackFragment extends Fragment {
             public void onClick(View view) {
                 PackModel  packModel = (PackModel) view.getTag();
                 EventBus.getDefault().postSticky(packModel);
-                detailfragment = new DetailFragment();
-                ScreenManager.replaceFragment(getActivity().getSupportFragmentManager(), detailfragment, R.id.layout_container, false);
+                ScreenManager.replaceFragment(getActivity().getSupportFragmentManager(), new  DetailFragment(), R.id.layout_container, true);
 
             }
         });

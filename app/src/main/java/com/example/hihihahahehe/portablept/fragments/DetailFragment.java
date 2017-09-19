@@ -84,24 +84,28 @@ public class DetailFragment extends Fragment {
         bt_register_pack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                RegisterPackJSON  registerPackJSON = new RegisterPackJSON();
-                registerPackJSON.setUser(RealmHandleAccount.getAccount().getData().getId());
-                registerPackJSON.setPack(packModel.getId());
-                RegisterPack registerPack = RetrofitFactory.getInstance().create(RegisterPack.class);
-                registerPack.register(registerPack).enqueue(new Callback<MassegeResponseJSON>() {
-                    @Override
-                    public void onResponse(Call<MassegeResponseJSON> call, Response<MassegeResponseJSON> response) {
-                        MassegeResponseJSON massegeResponseJSON = response.body();
-                        if (massegeResponseJSON.getMessage().equals("Register Data OK")){
-                            Toast.makeText(getActivity(), "Đã Đăng Ký Gói Tập,Chờ Phản Hồi Của HLV", Toast.LENGTH_SHORT).show();
+                if (bt_register_pack.getText().toString().equals("Đăng Ký")){
+                    RegisterPackJSON  registerPackJSON = new RegisterPackJSON();
+                    registerPackJSON.setUser(RealmHandleAccount.getAccount().getData().getId());
+                    registerPackJSON.setPack(packModel.getId());
+                    RegisterPack registerPack = RetrofitFactory.getInstance().create(RegisterPack.class);
+                    registerPack.register(registerPackJSON).enqueue(new Callback<MassegeResponseJSON>() {
+                        @Override
+                        public void onResponse(Call<MassegeResponseJSON> call, Response<MassegeResponseJSON> response) {
+                            MassegeResponseJSON massegeResponseJSON = response.body();
+                            Log.d("TEST",massegeResponseJSON.getMessage()+" "+RealmHandleAccount.getAccount().getData().getId()+" "+packModel.getId());
+                            if (massegeResponseJSON.getMessage().equals("Register Data OK")){
+                                Toast.makeText(getActivity(), "Đã Đăng Ký Gói Tập,Chờ Phản Hồi Của HLV", Toast.LENGTH_SHORT).show();
+                            }
                         }
-                    }
 
-                    @Override
-                    public void onFailure(Call<MassegeResponseJSON> call, Throwable t) {
-                        Toast.makeText(getActivity(), "Lỗi Mạng", Toast.LENGTH_SHORT).show();
-                    }
-                });
+                        @Override
+                        public void onFailure(Call<MassegeResponseJSON> call, Throwable t) {
+                            Toast.makeText(getActivity(), "Lỗi Mạng", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+
 
             }
         });
@@ -119,13 +123,13 @@ public class DetailFragment extends Fragment {
         tv_type.setText(this.packModel.getType());
         tv_Cost.setText(this.packModel.getCost());
         rbPackRating.setProgress(packModel.getStars());
+        tvGoal.setText(packModel.getDuration());
 
     }
     private void setOnClickItem() {
         tv_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity(), "Thoat", Toast.LENGTH_SHORT).show();
                 FragmentManager fm = getActivity().getSupportFragmentManager();
                 fm.popBackStack();
             }

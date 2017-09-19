@@ -28,6 +28,7 @@ import com.example.hihihahahehe.portablept.networks.RetrofitFactory;
 import com.example.hihihahahehe.portablept.networks.services.GetAllPacks;
 import com.example.hihihahahehe.portablept.networks.services.GetCoach;
 import com.example.hihihahahehe.portablept.networks.services.GetSports;
+import com.example.hihihahahehe.portablept.utils.ScreenManager;
 import com.synnapps.carouselview.CarouselView;
 import com.synnapps.carouselview.ImageListener;
 
@@ -87,6 +88,7 @@ public class HomeFragment extends Fragment {
             }
         };
 
+
         carouselView = (CarouselView) view.findViewById(R.id.carouselView);
         carouselView.setPageCount(sampleImages.length);
 
@@ -107,11 +109,16 @@ public class HomeFragment extends Fragment {
                 for(GetPackJSONModel packJSONModel : response.body()){
                     PackModel hotPackModel = new PackModel();
                     hotPackModel.setCoachName(packJSONModel.getCoach().getName());
-                    hotPackModel.setPrice(packJSONModel.getPrice());
+                    hotPackModel.setCost(packJSONModel.getPrice());
                     hotPackModel.setDuration(packJSONModel.getDuration());
                     hotPackModel.setPackName(packJSONModel.getPackName());
-                    hotPackModel.setType(packJSONModel.getPurpose());
+                    hotPackModel.setGoal(packJSONModel.getPurpose());
                     hotPackModel.setImg(packJSONModel.getPackImgUrl());
+                    hotPackModel.setCoach(packJSONModel.getCoach());
+                    hotPackModel.setContent(packJSONModel.getContent());
+                    hotPackModel.setId(packJSONModel.getId());
+                    hotPackModel.setType(packJSONModel.getType());
+                    hotPackModel.setContent(packJSONModel.getContent());
 
                     if(packJSONModel.getTotalStars() != null && packJSONModel.getVotedStars() != null){
                         hotPackModel.setStars((int)(packJSONModel.getTotalStars().intValue()/packJSONModel.getVotedStars().intValue()));
@@ -155,6 +162,7 @@ public class HomeFragment extends Fragment {
                     HotSportsModel hotSportsModel = new HotSportsModel();
                     hotSportsModel.setName(sportsJSONModel.getSportsName());
                     hotSportsModel.setImageURL(sportsJSONModel.getImageURL());
+
                     hotSportsModelList.add(hotSportsModel);
                 }
 
@@ -173,8 +181,6 @@ public class HomeFragment extends Fragment {
 
     private void setupUI(View view) {
         ButterKnife.bind(this, view);
-
-
         hotCoachesAdapter = new HotCoachesAdapter(hotCoachesModelList, getContext());
         rvHotCoaches.setAdapter(hotCoachesAdapter);
 
@@ -183,6 +189,15 @@ public class HomeFragment extends Fragment {
 
         hotPackAdapter = new PackAdapter(hotPackModelList, getContext(), view);
         rvHotPacks.setAdapter(hotPackAdapter);
+
+        hotPackAdapter.setOnclikListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PackModel  packModel = (PackModel) view.getTag();
+                EventBus.getDefault().postSticky(packModel);
+                ScreenManager.replaceFragment(getActivity().getSupportFragmentManager(), new  DetailFragment(), R.id.layout_container, true);
+            }
+        });
 
         final GridLayoutManager gridLayoutManagerCoaches = new GridLayoutManager(getContext(), 1, GridLayoutManager.HORIZONTAL, false);
         final GridLayoutManager gridLayoutManagerSports = new GridLayoutManager(getContext(), 2 , GridLayoutManager.HORIZONTAL, false);

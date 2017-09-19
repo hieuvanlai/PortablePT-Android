@@ -19,6 +19,7 @@ public class PackModel {
     private String content;
     private String id;
 
+
     public String getId() {
         return id;
     }
@@ -118,5 +119,10 @@ public class PackModel {
 
     public void setPrice(String price) {
         this.price = price;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString();
     }
 }
