@@ -153,15 +153,19 @@ public class ManagerPackFragment extends Fragment {
             });
         }
         if (RealmHandleAccount.getAccount().getData().getRole().equals("HLV")){
+
             GetMyPackHLV getMyPackHLV = RetrofitFactory.getInstance().create(GetMyPackHLV.class);
             getMyPackHLV.getPacks(RealmHandleAccount.getAccount().getData().getId()).enqueue(new Callback<List<GetPackJSONModel>>() {
                 @Override
                 public void onResponse(Call<List<GetPackJSONModel>> call, Response<List<GetPackJSONModel>> response) {
                     hotPackModelList.clear();
                     if (response.body()!=null){
+
                         for(GetPackJSONModel packJSONModel : response.body()){
                             PackModel hotPackModel = new PackModel();
+
                             hotPackModel.setCoachName(packJSONModel.getCoach().getName());
+
                             hotPackModel.setCost(packJSONModel.getPrice());
                             hotPackModel.setDuration(packJSONModel.getDuration());
                             hotPackModel.setPackName(packJSONModel.getPackName());
@@ -184,12 +188,14 @@ public class ManagerPackFragment extends Fragment {
 
                 @Override
                 public void onFailure(Call<List<GetPackJSONModel>> call, Throwable t) {
+                    Log.d("Test",t.toString());
 
 
                 }
             });
 
         }
+
 
     }
 

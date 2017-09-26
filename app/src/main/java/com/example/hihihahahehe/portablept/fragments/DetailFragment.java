@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.example.hihihahahehe.portablept.R;
 import com.example.hihihahahehe.portablept.databases.RealmHandleAccount;
+import com.example.hihihahahehe.portablept.events.OnclickProfile;
 import com.example.hihihahahehe.portablept.models.FaceBookModel;
 import com.example.hihihahahehe.portablept.models.JSONModel.MassegeResponseJSON;
 import com.example.hihihahahehe.portablept.models.JSONModel.PackJSONModel;
@@ -25,6 +26,7 @@ import com.example.hihihahahehe.portablept.models.PackModel;
 import com.example.hihihahahehe.portablept.networks.RetrofitFactory;
 import com.example.hihihahahehe.portablept.networks.services.RegisterAccout;
 import com.example.hihihahahehe.portablept.networks.services.RegisterPack;
+import com.example.hihihahahehe.portablept.utils.ScreenManager;
 import com.squareup.picasso.Picasso;
 
 import org.greenrobot.eventbus.EventBus;
@@ -132,6 +134,18 @@ public class DetailFragment extends Fragment {
             public void onClick(View view) {
                 FragmentManager fm = getActivity().getSupportFragmentManager();
                 fm.popBackStack();
+            }
+        });
+        iv_avatar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                OnclickProfile data = new OnclickProfile();
+                data.setDataUser(packModel.getCoach());
+                EventBus.getDefault().postSticky(data);
+                ScreenManager.replaceFragment(getActivity().getSupportFragmentManager(),new FragmentProfileCoach(),R.id.layout_container,true);
+
+
+
             }
         });
     }

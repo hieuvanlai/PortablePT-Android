@@ -220,6 +220,9 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                     if (loginAndRegisterResponseJSON.getMessage().equals("Invalid password")){
                         Toast.makeText(getActivity(), "Bạn Nhập Sai Mật Khẩu", Toast.LENGTH_SHORT).show();
                     }
+                    if (loginAndRegisterResponseJSON.getMessage().equals("User   not found")){
+                        Toast.makeText(getActivity(), "Tài Khoản Không Tồn Tại", Toast.LENGTH_SHORT).show();
+                    }
                     if (loginAndRegisterResponseJSON.getMessage().equals("Login OK")){
                         RealmHandleAccount.deleteAccount();
                         RealmHandleAccount.addAccount(loginAndRegisterResponseJSON);
