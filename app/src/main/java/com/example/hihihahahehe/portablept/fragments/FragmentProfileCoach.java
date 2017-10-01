@@ -55,7 +55,6 @@ public class FragmentProfileCoach extends Fragment {
 
     private void setUpUI(View view) {
         ButterKnife.bind(this, view);
-        // dang ki nhan su kien
         EventBus.getDefault().register(this);
     }
     @Subscribe(sticky = true)
