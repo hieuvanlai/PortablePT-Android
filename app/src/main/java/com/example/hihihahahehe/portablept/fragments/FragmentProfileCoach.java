@@ -62,12 +62,5 @@ public class FragmentProfileCoach extends Fragment {
         DataLoginJSON dataLoginJSON = onclickProfile.getDataUser();
         Picasso.with(getContext()).load(dataLoginJSON.getImgAvata()).transform(new CropCircleTransformation()).into(imageAvata);
         tvName.setText(dataLoginJSON.getName());
-
-
-
-
-
-
-
     }
 }
