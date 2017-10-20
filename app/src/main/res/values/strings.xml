@@ -2,7 +2,11 @@
     <string name="app_name">PortablePT</string>
     <string name="facebook_app_id">1883397265244371</string>
     <string name="fb_login_protocol_scheme">fb144792232775233</string>
+    <string name="testcontent">Tập gym làm bắp tay, chân to lên
 
+Điều này không đúng, do liên quan đến lượng hoocmon testosterone trong cơ thể. Nam giới sở dĩ nhiều cơ bắp do có lượng testosterone cao gấp 30 lần nữ giới.
+Những nữ vận động viên thể hình có cơ bắp cuồn cuộn do phải tiêm thêm hoocmon testosterone ngoại sinh.
+Anh Hiếu phân tích, ở những người béo, cái mọi người nhìn thấy là mỡ và nước, khi tập luyện nhiều, mỡ sẽ bị đốt dần, cơ thể trở nên săn chắc gọn gàng hơn.</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_scrolling">ScrollingActivity</string>

@@ -15,6 +15,9 @@ import android.widget.Toast;
 
 import com.example.hihihahahehe.portablept.R;
 import com.example.hihihahahehe.portablept.adapters.PackAdapter;
+import com.example.hihihahahehe.portablept.events.PushDataPacks;
+import com.example.hihihahahehe.portablept.events.PushDataSports;
+import com.example.hihihahahehe.portablept.fragments.typeofpacks.DetailFragmentTest;
 import com.example.hihihahahehe.portablept.models.HotCoachesModel;
 import com.example.hihihahahehe.portablept.models.HotSportsModel;
 import com.example.hihihahahehe.portablept.models.JSONModel.GetPackJSONModel;
@@ -54,7 +57,7 @@ public class PackFragment extends Fragment {
     RecyclerView  rvHotPacks;
     private PackAdapter hotPackAdapter;
     private List<PackModel> hotPackModelList = new ArrayList<>();
-    private DetailFragment detailfragment;
+
     public PackFragment() {
         // Required empty public constructor
     }
@@ -99,10 +102,11 @@ public class PackFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        EventBus.getDefault().register(this);
+
         View view = inflater.inflate(R.layout.fragment_pack, container, false);
         ButterKnife.bind(this, view);
-        Utils.addTab(tabLayout,"");
+        EventBus.getDefault().register(this);
+        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
         final LinearLayoutManager linearLayoutManagerPacks = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
 
         hotPackAdapter = new PackAdapter(hotPackModelList, getContext());
@@ -112,7 +116,7 @@ public class PackFragment extends Fragment {
             public void onClick(View view) {
                 PackModel  packModel = (PackModel) view.getTag();
                 EventBus.getDefault().postSticky(packModel);
-                ScreenManager.replaceFragment(getActivity().getSupportFragmentManager(), new  DetailFragment(), R.id.layout_container, true);
+                ScreenManager.replaceFragment(getActivity().getSupportFragmentManager(), new DetailFragmentTest(), R.id.layout_container, true);
 
             }
         });
@@ -142,14 +146,16 @@ public class PackFragment extends Fragment {
         return view;
     }
     @Subscribe(sticky = true)
-    public  void onRecivedPack (List<HotSportsModel>  hotSportsModelList){
+    public  void onRecivedPack (PushDataSports pushDataSports){
+
         if (checkdata==0){
-            this.hotSportsModelList = hotSportsModelList;
+            hotSportsModelList = pushDataSports.hotSportsModelList;
             tabLayout.removeAllTabs();
-            tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
             for(int i = 0; i < hotSportsModelList.size(); i++){
                 Utils.addTab(tabLayout,hotSportsModelList.get(i).getName());
             }
+            HotSportsModel hotSportsModel  = hotSportsModelList.get(0);
+            loadPack(hotSportsModel);
             checkdata=1;
         }
 

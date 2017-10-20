@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import com.example.hihihahahehe.portablept.R;
 import com.example.hihihahahehe.portablept.adapters.PackAdapter;
 import com.example.hihihahahehe.portablept.databases.RealmHandleAccount;
+import com.example.hihihahahehe.portablept.fragments.typeofpacks.DetailFragmentTest;
 import com.example.hihihahahehe.portablept.models.FaceBookModel;
 import com.example.hihihahahehe.portablept.models.JSONModel.GetPackJSONModel;
 import com.example.hihihahahehe.portablept.models.JSONModel.MyPackJSONModel;
@@ -90,7 +91,7 @@ public class ManagerPackFragment extends Fragment {
             public void onClick(View view) {
                 PackModel  packModel = (PackModel) view.getTag();
                 EventBus.getDefault().postSticky(packModel);
-                ScreenManager.replaceFragment(getActivity().getSupportFragmentManager(), new  DetailFragment(), R.id.layout_container, true);
+                ScreenManager.replaceFragment(getActivity().getSupportFragmentManager(), new DetailFragmentTest(), R.id.layout_container, true);
             }
         });
     }

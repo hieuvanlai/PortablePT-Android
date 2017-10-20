@@ -18,6 +18,10 @@ import com.example.hihihahahehe.portablept.R;
 import com.example.hihihahahehe.portablept.adapters.HotCoachesAdapter;
 import com.example.hihihahahehe.portablept.adapters.HotSportsAdapter;
 import com.example.hihihahahehe.portablept.adapters.PackAdapter;
+import com.example.hihihahahehe.portablept.events.PushDaTaCoaches;
+import com.example.hihihahahehe.portablept.events.PushDataPacks;
+import com.example.hihihahahehe.portablept.events.PushDataSports;
+import com.example.hihihahahehe.portablept.fragments.typeofpacks.DetailFragmentTest;
 import com.example.hihihahahehe.portablept.models.HotCoachesModel;
 import com.example.hihihahahehe.portablept.models.HotSportsModel;
 import com.example.hihihahahehe.portablept.models.JSONModel.DataLoginJSON;
@@ -33,6 +37,7 @@ import com.synnapps.carouselview.CarouselView;
 import com.synnapps.carouselview.ImageListener;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -76,11 +81,18 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
+        setupUI(view);
 
+        return view;
+    }
+
+    private void setupUI(View view) {
+        ButterKnife.bind(this, view);
+        EventBus.getDefault().register(this);
+        carouselView = (CarouselView) view.findViewById(R.id.carouselView);
         rvHotCoaches = (RecyclerView) view.findViewById(R.id.rv_hot_coaches);
         rvHotSports = (RecyclerView) view.findViewById(R.id.rv_hot_sports);
         rvHotPacks = (RecyclerView) view.findViewById(R.id.rv_hot_packs);
-
         ImageListener imageListener = new ImageListener() {
             @Override
             public void setImageForPosition(int position, ImageView imageView) {
@@ -89,98 +101,10 @@ public class HomeFragment extends Fragment {
         };
 
 
-        carouselView = (CarouselView) view.findViewById(R.id.carouselView);
+
         carouselView.setPageCount(sampleImages.length);
 
         carouselView.setImageListener(imageListener);
-
-        loadData();
-        setupUI(view);
-
-        return view;
-    }
-
-    private void loadData() {
-        final GetAllPacks getAllPacks = RetrofitFactory.getInstance().create(GetAllPacks.class);
-        getAllPacks.getAllPacks().enqueue(new Callback<List<GetPackJSONModel>>() {
-            @Override
-            public void onResponse(Call<List<GetPackJSONModel>> call, Response<List<GetPackJSONModel>> response) {
-
-                for(GetPackJSONModel packJSONModel : response.body()){
-                    PackModel hotPackModel = new PackModel();
-                    hotPackModel.setCoachName(packJSONModel.getCoach().getName());
-                    hotPackModel.setCost(packJSONModel.getPrice());
-                    hotPackModel.setDuration(packJSONModel.getDuration());
-                    hotPackModel.setPackName(packJSONModel.getPackName());
-                    hotPackModel.setGoal(packJSONModel.getPurpose());
-                    hotPackModel.setImg(packJSONModel.getPackImgUrl());
-                    hotPackModel.setCoach(packJSONModel.getCoach());
-                    hotPackModel.setContent(packJSONModel.getContent());
-                    hotPackModel.setId(packJSONModel.getId());
-                    hotPackModel.setType(packJSONModel.getType());
-                    hotPackModel.setContent(packJSONModel.getContent());
-
-                    if(packJSONModel.getTotalStars() != null && packJSONModel.getVotedStars() != null){
-                        hotPackModel.setStars((int)(packJSONModel.getTotalStars().intValue()/packJSONModel.getVotedStars().intValue()));
-                    }
-                    Log.d("TEST",packJSONModel.getPrice());
-                    hotPackModelList.add(hotPackModel);
-                }
-
-                hotPackAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onFailure(Call<List<GetPackJSONModel>> call, Throwable t) {
-                Toast.makeText(getContext(), "Failed to load hot coaches into HomeFragment", Toast.LENGTH_SHORT);
-            }
-        });
-        GetCoach getCoach = RetrofitFactory.getInstance().create(GetCoach.class);
-        getCoach.getCoach().enqueue(new Callback<List<DataLoginJSON>>() {
-            @Override
-            public void onResponse(Call<List<DataLoginJSON>> call, Response<List<DataLoginJSON>> response) {
-                for(DataLoginJSON coachJSONModel : response.body()){
-                    HotCoachesModel hotCoachesModel = new HotCoachesModel();
-                    hotCoachesModel.setName(coachJSONModel.getName());
-                    hotCoachesModel.setAvata(coachJSONModel.getImgAvata());
-                    hotCoachesModelList.add(hotCoachesModel);
-                }
-                hotCoachesAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onFailure(Call<List<DataLoginJSON>> call, Throwable t) {
-
-            }
-        });
-
-        final GetSports getSports = RetrofitFactory.getInstance().create(GetSports.class);
-        getSports.getSports().enqueue(new Callback<List<SportsJSONModel>>() {
-            @Override
-            public void onResponse(Call<List<SportsJSONModel>> call, Response<List<SportsJSONModel>> response) {
-                for(SportsJSONModel sportsJSONModel : response.body()){
-                    HotSportsModel hotSportsModel = new HotSportsModel();
-                    hotSportsModel.setName(sportsJSONModel.getSportsName());
-                    hotSportsModel.setImageURL(sportsJSONModel.getImageURL());
-
-                    hotSportsModelList.add(hotSportsModel);
-                }
-
-                EventBus.getDefault().postSticky(hotSportsModelList);
-
-                hotSportsAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onFailure(Call<List<SportsJSONModel>> call, Throwable t) {
-                Toast.makeText(getContext(), "Failed to load hot sports into HomeFragment", Toast.LENGTH_SHORT);
-            }
-        });
-    }
-
-
-    private void setupUI(View view) {
-        ButterKnife.bind(this, view);
         hotCoachesAdapter = new HotCoachesAdapter(hotCoachesModelList, getContext());
         rvHotCoaches.setAdapter(hotCoachesAdapter);
 
@@ -195,7 +119,7 @@ public class HomeFragment extends Fragment {
             public void onClick(View view) {
                 PackModel  packModel = (PackModel) view.getTag();
                 EventBus.getDefault().postSticky(packModel);
-                ScreenManager.replaceFragment(getActivity().getSupportFragmentManager(), new  DetailFragment(), R.id.layout_container, true);
+                ScreenManager.replaceFragment(getActivity().getSupportFragmentManager(), new DetailFragmentTest(), R.id.layout_container, true);
             }
         });
 
@@ -207,4 +131,27 @@ public class HomeFragment extends Fragment {
         rvHotSports.setLayoutManager(gridLayoutManagerSports);
         rvHotPacks.setLayoutManager(linearLayoutManagerPacks);
     }
+    @Subscribe(sticky = true)
+    public void  loadPacks(PushDataPacks pushDataPacks){
+        hotPackModelList= pushDataPacks.hotPackModelList;
+        hotPackAdapter.notifyDataSetChanged();
+
+    }
+    @Subscribe(sticky = true)
+    public void  loadCoach(PushDaTaCoaches pushDaTaCoaches){
+        hotCoachesModelList= pushDaTaCoaches.hotCoachesModelList;
+
+        hotCoachesAdapter.notifyDataSetChanged();
+
+    }
+    @Subscribe(sticky = true)
+    public void  loadSports(PushDataSports pushDataSports){
+        hotSportsModelList= pushDataSports.hotSportsModelList;
+        hotSportsAdapter.notifyDataSetChanged();
+
+    }
+
+
+
+
 }

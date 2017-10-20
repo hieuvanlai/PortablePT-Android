@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/cardview_light_background">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="7dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:scaleType="centerCrop"
+                android:id="@+id/iv_banner"
+                android:background="@drawable/sample_sports"
+                android:layout_width="match_parent"
+                android:layout_height="230dp" />
+            <Button
+                android:layout_width="50dp"
+                android:id="@+id/tv_back"
+                android:background="@drawable/ic_arrow_back_black_24dp"
+                android:layout_height="50dp" />
+            <RelativeLayout
+                android:id="@+id/rll_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:layout_below="@id/iv_banner">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:id="@+id/tv_pack_name"
+                    android:textColor="#000000"
+                    android:text="Gói Tập Tăng Cân Giảm Mỡ"/>
+                <TextView
+                    android:layout_below="@id/tv_pack_name"
+                    android:text="1.700.000.vnd"
+                    android:textColor="#ff0000"
+                    android:textSize="20sp"
+                    android:layout_marginTop="5dp"
+                    android:id="@+id/tv_price"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_below="@id/tv_price"
+                    android:layout_marginTop="5dp"
+                    android:text="Hôm nay 08:21"
+                    android:textSize="16sp"
+                    android:id="@+id/tv_time_post"
+                    android:textColor="@color/colorHint"
+                    android:layout_height="wrap_content" />
+
+                </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:id="@+id/rrl_coach"
+                android:layout_below="@id/rll_title"
+                android:layout_height="wrap_content">
+                <View
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_width="match_parent"
+                    android:id="@+id/v_top"
+                    android:background="@color/colorHint"
+                    android:layout_height="1dp"/>
+                <ImageView
+                    android:layout_marginTop="12dp"
+                    android:layout_below="@id/v_top"
+                    android:layout_width="100dp"
+                    android:id="@+id/iv_avatar"
+                    android:layout_marginLeft="15dp"
+                    android:layout_height="100dp" />
+                <TextView
+                    android:id="@+id/tv_coach"
+                    android:layout_width="wrap_content"
+                    android:text="Tru Nguyen Truong"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_below="@id/v_top"
+                    android:textColor="#1b1b18"
+                    android:textSize="16sp"
+                    android:layout_toEndOf="@id/iv_avatar"
+                    android:layout_height="wrap_content" />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@id/iv_avatar"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginTop="7dp"
+                    android:id="@+id/iv_icon_location"
+                    android:layout_below="@id/tv_coach"
+                    android:src="@drawable/ic_location_on_black_24dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_toEndOf="@id/iv_icon_location"
+                    android:layout_marginTop="10dp"
+                    android:layout_below="@id/tv_coach"
+                    android:text="Số 9 Dương Quảng Hàm"
+                    android:textColor="@color/colorHint"
+                    android:id="@+id/tv_address"
+                    android:layout_height="wrap_content" />
+
+                <RatingBar
+                    android:rating="5"
+                    android:numStars="5"
+                    android:scaleX="0.7"
+                    android:scaleY="0.7"
+                    android:stepSize="0.5"
+                    android:isIndicator="true"
+                    android:id="@+id/rb_pack_rating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="18dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignEnd="@+id/v_bottom" />
+
+                <View
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="12dp"
+                    android:layout_below="@id/iv_avatar"
+                    android:id="@+id/v_bottom"
+                    android:background="@color/colorHint"
+                    android:layout_height="1dp"/>
+            </RelativeLayout>
+            <RelativeLayout
+
+                    android:id="@+id/rll_content"
+                android:layout_below="@id/rrl_coach"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:textSize="15dp"
+                    android:textColor="#3d3d29"
+                    android:id="@+id/tv_content"
+                    android:text="@string/testcontent"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
+            <LinearLayout
+                android:layout_below="@id/rll_content"
+                android:layout_width="match_parent"
+                android:padding="16dp"
+                android:id="@+id/lnl_table"
+                android:orientation="vertical"
+                android:layout_height="match_parent">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:padding="3dp"
+                    android:orientation="horizontal"
+                    android:layout_weight="1">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:text="Môn Tập"
+                        android:textColor="#3d3d29"
+                        android:textSize="18sp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:text="Gym"
+                        android:textColor="#0f0f0a"
+                        android:textSize="20sp"
+                        android:id="@+id/tv_type"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:padding="3dp"
+                    android:orientation="horizontal"
+                    android:layout_weight="1">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:text="Thời Gian Tập"
+                        android:textColor="#3d3d29"
+                        android:textSize="18sp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:text="5 Tuần"
+                        android:textColor="#0f0f0a"
+                        android:textSize="20sp"
+                        android:id="@+id/tv_duration"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:padding="3dp"
+                    android:orientation="horizontal"
+                    android:layout_weight="1">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:text="Học Viên Đã Học"
+                        android:textColor="#3d3d29"
+                        android:textSize="18sp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:text="5 Người"
+                        android:id="@+id/tv_number_student"
+                        android:textColor="#0f0f0a"
+                        android:textSize="20sp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"/>
+                </LinearLayout>
+
+            </LinearLayout>
+            <RelativeLayout
+                android:layout_below="@id/lnl_table"
+                android:padding="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                >
+                <Button
+                    android:background="@color/colorPrimary"
+                    android:id="@+id/bt_register_pack"
+                    android:layout_width="150dp"
+                    android:text="Đăng Ký"
+                    android:layout_centerHorizontal="true"
+                    android:layout_height="match_parent" />
+            </RelativeLayout>
+
+
+
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>

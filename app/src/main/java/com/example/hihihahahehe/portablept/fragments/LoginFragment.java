@@ -93,20 +93,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         } catch (NoSuchAlgorithmException e) {
 
         }
-        if (RealmHandleAccount.getAccount()!=null){
-            LoginAndRegisterResponseJSON loginAndRegisterResponseJSON = RealmHandleAccount.getAccount();
 
-            if (loginAndRegisterResponseJSON.getData().getRole().equals("HLV")||loginAndRegisterResponseJSON.getData().getRole().equals("HV")){
-                Log.d("ROLE", RealmHandleAccount.getAccount().getData().getRole());
-                ScreenManager.replaceFragment(getActivity().getSupportFragmentManager(), new FirstScreenFragment(), R.id.layout_container_main, false);
-
-            }
-            else {
-                ScreenManager.replaceFragment(getActivity().getSupportFragmentManager(), new RoleFragment(), R.id.layout_container_main, false);
-
-            }
-
-        }
 
 
         accessToken = AccessToken.getCurrentAccessToken();
