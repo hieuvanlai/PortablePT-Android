@@ -87,7 +87,7 @@ public class CreatePackFragment extends Fragment implements View.OnClickListener
     CheckBox checkBoxT7;
     @BindView(R.id.cb_T5)
     CheckBox checkBoxT5;
-    @BindView(R.id.edt_conten)
+    @BindView(R.id.edt_content)
     TextView edt_content;
 
 
@@ -96,14 +96,14 @@ public class CreatePackFragment extends Fragment implements View.OnClickListener
     public CreatePackFragment() {
         // Required empty public constructor
     }
-    int checkdata =0;
+    int checkData = 0;
     private ArrayAdapter<String> arrayAdapter;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_create_pack, container, false);
+        View view = inflater.inflate(R.layout.fragment_create_pack_1, container, false);
         setupUI(view);
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         return view;
@@ -261,13 +261,13 @@ public class CreatePackFragment extends Fragment implements View.OnClickListener
     }
     //get Pack Type
     @Subscribe(sticky = true)
-    public  void onRecivedPack (List<HotSportsModel>  hotSportsModelList){
-        if (checkdata==0){
+    public  void onReceivedPack(List<HotSportsModel>  hotSportsModelList){
+        if (checkData == 0){
             arrayAdapter.clear();
             for(int i = 0; i < hotSportsModelList.size(); i++){
                     arrayAdapter.add(hotSportsModelList.get(i).getName());
             }
-            checkdata=1;
+            checkData = 1;
         }
 
 

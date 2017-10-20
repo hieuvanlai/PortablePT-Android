@@ -12,7 +12,7 @@
         android:padding="16dp">
 
         <RelativeLayout
-            android:id="@+id/relative_layout"
+            android:id="@+id/relative_layout_3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -37,7 +37,7 @@
             android:id="@+id/iv_avatarUser"
             android:layout_width="120dp"
             android:layout_height="120dp"
-            android:layout_below="@+id/relative_layout"
+            android:layout_below="@+id/relative_layout_3"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="10dp" />
 
