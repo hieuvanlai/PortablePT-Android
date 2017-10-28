@@ -32,6 +32,7 @@ import com.example.hihihahahehe.portablept.networks.services.AddPack;
 import com.example.hihihahahehe.portablept.utils.ScreenManager;
 
 import org.greenrobot.eventbus.Subscribe;
+import org.w3c.dom.Text;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -59,36 +60,17 @@ public class CreatePackFragment extends Fragment implements View.OnClickListener
     private InputStream inputStream;
     private String packName;
     private String type;
-    @BindView(R.id.edt_pack_name)
-    EditText edtPackName;
-    @BindView(R.id.edt_pack_price)
-    EditText edtPackPrice;
-    @BindView(R.id.bt_cancel)
-    TextView btCancel;
-    @BindView(R.id.bt_create)
-    TextView btCreate;
-    @BindView(R.id.tv_set_week)
-    TextView tvSetWeek;
-    @BindView(R.id.tv_set_type)
-    TextView tvSetType;
-    @BindView(R.id.iv_add_image)
-    ImageView ivAddImage;
-    @BindView(R.id.edt_address)
-    EditText edtAddress;
-    @BindView(R.id.cb_T2)
-    CheckBox checkBoxT2;
-    @BindView(R.id.cb_T3)
-    CheckBox checkBoxT3;
-    @BindView(R.id.cb_T4)
-    CheckBox checkBoxT4;
-    @BindView(R.id.cb_T6)
-    CheckBox checkBoxT6;
-    @BindView(R.id.cb_T7)
-    CheckBox checkBoxT7;
-    @BindView(R.id.cb_T5)
-    CheckBox checkBoxT5;
-    @BindView(R.id.edt_content)
-    TextView edt_content;
+
+//    @BindView(R.id.edt_pack_price)
+//    EditText edtPackPrice;
+//
+//    @BindView(R.id.tv_set_week)
+//    TextView tvSetWeek;
+//
+//    @BindView(R.id.iv_add_image)
+//    ImageView ivAddImage;
+
+
 
 
 
@@ -170,9 +152,9 @@ public class CreatePackFragment extends Fragment implements View.OnClickListener
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.bt_cancel:
-                ScreenManager.onBackPressed(getActivity().getSupportFragmentManager());
-                break;
+//            case R.id.bt_cancel:
+//                ScreenManager.onBackPressed(getActivity().getSupportFragmentManager());
+//                break;
             case R.id.tv_set_week:
                 showChooseWeekDialog();
                 break;
@@ -187,25 +169,25 @@ public class CreatePackFragment extends Fragment implements View.OnClickListener
                 String price = edtPackPrice.getText().toString() + " VND";
                 String address = edtAddress.getText().toString();
                 String imageUrl = "https://res.cloudinary.com/dekbhfa6g/image/upload/" + edtPackName.getText().toString() + ".jpg";
-                String calendar ="" ;
-                if (checkBoxT2.isChecked()){
-                    calendar = calendar + " T2 ";
-                }
-                if (checkBoxT3.isChecked()){
-                    calendar = calendar + " T3 ";
-                }
-                if (checkBoxT4.isChecked()){
-                    calendar = calendar + " T4 ";
-                }
-                if (checkBoxT5.isChecked()){
-                    calendar = calendar + " T5 ";
-                }
-                if (checkBoxT6.isChecked()){
-                    calendar = calendar + " T6 ";
-                }
-                if (checkBoxT7.isChecked()){
-                    calendar = calendar + " T7 ";
-                }
+//                String calendar ="" ;
+//                if (checkBoxT2.isChecked()){
+//                    calendar = calendar + " T2 ";
+//                }
+//                if (checkBoxT3.isChecked()){
+//                    calendar = calendar + " T3 ";
+//                }
+//                if (checkBoxT4.isChecked()){
+//                    calendar = calendar + " T4 ";
+//                }
+//                if (checkBoxT5.isChecked()){
+//                    calendar = calendar + " T5 ";
+//                }
+//                if (checkBoxT6.isChecked()){
+//                    calendar = calendar + " T6 ";
+//                }
+//                if (checkBoxT7.isChecked()){
+//                    calendar = calendar + " T7 ";
+//                }
                 String content= edt_content.getText().toString();
 
                 PackJSONModel model = new PackJSONModel(type, packName, coach, price, duration, imageUrl, address,calendar,content);

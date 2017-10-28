@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.hihihahahehe.portablept.fragments.CreatePackFragment">
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.hihihahahehe.portablept.fragments.CreatePackFragment3">
 
     <RelativeLayout
         android:id="@+id/relative_layout_4"
@@ -31,11 +32,10 @@
 
     <RelativeLayout
         android:id="@+id/layout_content_4"
-        android:layout_below="@id/relative_layout_4"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="30dp"
-        android:layout_alignParentBottom="true"
+        android:layout_alignParentTop="true"
         android:layout_alignParentStart="true">
 
         <TextView
@@ -75,7 +75,7 @@
             android:maxLength="200"/>
 
         <TextView
-            android:id="@+id/bt_create_2"
+            android:id="@+id/bt_create_4"
             android:layout_below="@id/edt_content"
             android:layout_marginTop="40dp"
             android:layout_centerHorizontal="true"

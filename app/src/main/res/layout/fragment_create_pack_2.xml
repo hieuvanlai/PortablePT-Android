@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.hihihahahehe.portablept.fragments.CreatePackFragment">
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.hihihahahehe.portablept.fragments.CreatePackFragment1">
 
     <RelativeLayout
         android:id="@+id/relative_layout_2"
@@ -38,6 +39,7 @@
         android:layout_alignParentStart="true">
 
         <TextView
+            android:id="@+id/tv_pack_name"
             android:layout_above="@id/edt_pack_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

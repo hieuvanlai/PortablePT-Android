@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.hihihahahehe.portablept.fragments.CreatePackFragment2">
 
     <RelativeLayout
         android:id="@+id/relative_layout_3"
@@ -61,42 +64,42 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginBottom="23dp"
-            android:layout_above="@+id/tv_set_time"
             android:textStyle="bold"
             android:textSize="22sp"
+            android:layout_centerVertical="true"
             android:layout_centerHorizontal="true" />
 
-        <TextView
-            android:id="@+id/tv_set_time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="5dp"
-            android:text="   Thời gian :"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:textSize="25sp"
-            android:textColor="#fff"
-           />
-        <TextView
-            android:id="@+id/tv_set_week"
-            android:layout_below="@id/tv_set_time"
-            android:layout_width="270dp"
-            android:layout_height="60dp"
-            android:background="@drawable/custom_imageview"
-            android:hint="Chọn thời gian ▾"
-            android:padding="18dp"
-            android:layout_centerHorizontal="true"
-            android:textAlignment="center"
-            android:textColor="#000"
-            android:layout_margin="20dp"
-            android:textStyle="bold"
-            android:textSize="22sp"
-            android:textColorHint="@color/colorHint"/>
+        <!--<TextView-->
+            <!--android:id="@+id/tv_set_time"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginEnd="5dp"-->
+            <!--android:text="   Thời gian :"-->
+            <!--android:layout_centerHorizontal="true"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:textSize="25sp"-->
+            <!--android:textColor="#fff"-->
+           <!--/>-->
+        <!--<TextView-->
+            <!--android:id="@+id/tv_set_week"-->
+            <!--android:layout_below="@id/tv_set_time"-->
+            <!--android:layout_width="270dp"-->
+            <!--android:layout_height="60dp"-->
+            <!--android:background="@drawable/custom_imageview"-->
+            <!--android:hint="Chọn thời gian ▾"-->
+            <!--android:padding="18dp"-->
+            <!--android:layout_centerHorizontal="true"-->
+            <!--android:textAlignment="center"-->
+            <!--android:textColor="#000"-->
+            <!--android:layout_margin="20dp"-->
+            <!--android:textStyle="bold"-->
+            <!--android:textSize="22sp"-->
+            <!--android:textColorHint="@color/colorHint"/>-->
 
         <TextView
             android:id="@+id/bt_create_3"
-            android:layout_below="@id/tv_set_week"
-            android:layout_marginTop="15dp"
+            android:layout_below="@id/tv_set_type"
+            android:layout_marginTop="65dp"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:layout_toStartOf="@+id/view"
